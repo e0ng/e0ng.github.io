@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KWON YEWON — Portfolio</title>
+<meta name="description" content="검색과 LLM 시스템을 만들어 온 대학원 지원자의 포트폴리오.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eeede9;
+    --text: #1a1a1a;
+    --muted: #77756f;
+    --line: #c9c7c1;
+    --accent: #55534e;
+    --frame: #dddbd5;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161615; --text: #ecebe7; --muted: #8f8d87; --line: #3a3936; --accent: #b5b3ad; --frame: #262624;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161615; --text: #ecebe7; --muted: #8f8d87; --line: #3a3936; --accent: #b5b3ad; --frame: #262624;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Inter", "Noto Sans KR", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.7; letter-spacing: -0.005em;
+    word-break: keep-all; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .accent { color: var(--accent); }
+  .small { font-size: 12px; line-height: 1.6; }
+  .muted { color: var(--muted); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 40px; } }
+
+  /* ---------- top menu ---------- */
+  .top { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid transparent; transition: border-color .2s; }
+  .top.scrolled { border-bottom-color: var(--line); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { font-size: 12px; font-weight: 500; letter-spacing: .02em; white-space: nowrap; }
+  .menu { display: flex; gap: 22px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; overflow-x: auto; scrollbar-width: none; }
+  .menu::-webkit-scrollbar { display: none; }
+  .menu a { color: var(--muted); white-space: nowrap; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
+  .menu a:hover { color: var(--text); }
+  .menu a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  @media (max-width: 560px) { .brand { display: none; } .top .wrap { justify-content: center; } .menu { gap: 18px; } }
+
+  /* ---------- page switching ---------- */
+  .page { display: none; min-height: calc(100vh - 60px); padding-bottom: 12vh; }
+  .page.active { display: block; animation: fade .45s ease both; }
+  @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .page.active { animation: none; } }
+
+  .page-title { padding: 12vh 0 4vh; }
+  .page-title h2 { font-weight: 400; font-size: clamp(48px, 9vw, 112px); letter-spacing: -0.06em; line-height: .95; margin: 0; text-transform: lowercase; }
+  .page-title p { margin: 14px 0 0; color: var(--muted); font-size: 13px; }
+
+  /* ---------- home ---------- */
+  .hero { padding: 11vh 0 0; }
+  .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 18px 0 0; }
+  .chips li { font-size: 11px; letter-spacing: .02em; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
+  .hero .kw { font-size: 12px; letter-spacing: .04em; color: var(--accent); margin: 0 0 18px; }
+  .hero h1 {
+    font-weight: 400; font-size: clamp(56px, 10vw, 128px);
+    line-height: .9; letter-spacing: -0.065em; margin: 0; text-transform: lowercase;
+  }
+  .hero .rule { border: 0; border-top: 1px solid var(--line); margin: 22px 0 12px; max-width: 900px; }
+  .hero .lead { font-size: clamp(20px, 2.4vw, 28px); letter-spacing: -0.025em; line-height: 1.35; max-width: 720px; margin: 0; }
+  .hero .meta { font-size: 11px; line-height: 1.55; color: var(--text); margin: 14px 0 0; }
+  .stmt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: end; max-width: 900px; margin-top: 16vh; }
+  .stmt .ko { font-size: 13px; line-height: 1.7; max-width: 300px; margin: 0; }
+  .kwline { font-size: 12px; letter-spacing: .01em; color: var(--muted); margin: 12px 0 0; }
+  .slab { display: block; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .stmt .en { font-size: 13px; line-height: 1.7; text-align: right; margin: 0; }
+  @media (max-width: 720px) { .stmt { grid-template-columns: 1fr; gap: 20px; } .stmt .en { text-align: left; } }
+  .hero h2 { font-weight: 400; font-size: clamp(20px, 2.8vw, 30px); letter-spacing: -0.02em; margin: 0; }
+
+  .intro { display: flex; justify-content: flex-end; padding: 14vh 0 10vh; }
+  .intro .ko { max-width: 420px; font-size: 16px; margin: 0; }
+  .intro .en { text-align: right; justify-self: end; max-width: 420px; margin: 0; }
+  @media (max-width: 720px) { .intro { justify-content: flex-start; } .intro .en { text-align: left; justify-self: start; } }
+
+
+  /* ---------- rows ---------- */
+  .list { border-top: 1px solid var(--line); }
+  .item { display: grid; grid-template-columns: 220px 1fr; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .left { font-size: 12px; color: var(--muted); display: grid; grid-template-columns: 1fr; gap: 8px; align-content: start; padding-top: 4px; }
+  .item h4 { font-weight: 400; font-size: 18px; letter-spacing: -0.015em; margin: 0; line-height: 1.45; }
+  .item .sub { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+  @media (max-width: 720px) {
+    .item { grid-template-columns: 1fr; gap: 6px; }
+    .left { grid-template-columns: auto auto; justify-content: start; gap: 16px; }
+  }
+
+  /* ---------- collapsible projects ---------- */
+  details.proj { border-bottom: 1px solid var(--line); }
+  details.proj summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto 28px; gap: 24px; align-items: start; padding: 22px 0; }
+  details.proj summary::-webkit-details-marker { display: none; }
+  details.proj summary h4 { font-weight: 400; font-size: 18px; letter-spacing: -0.015em; margin: 0; line-height: 1.45; }
+  details.proj summary .one { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+  details.proj summary .tog { font-size: 20px; line-height: 1; text-align: right; color: var(--muted); transition: transform .2s; }
+  details.proj[open] summary .tog { transform: rotate(45deg); color: var(--accent); }
+  details.proj summary:hover h4 { color: var(--accent); }
+  .status { display: inline-block; margin-left: 8px; font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0 7px; vertical-align: 2px; }
+  .body { padding: 0 0 26px; }
+  .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 10px 0 0; }
+  .tags li { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; }
+  .st { font-size: 11px; border-radius: 999px; padding: 2px 9px; margin-top: 4px; white-space: nowrap; }
+  .st.ing { background: var(--accent); color: var(--bg); }
+  .st.done { border: 1px solid var(--line); color: var(--muted); }
+  .shot { position: relative; margin: 0 0 22px; aspect-ratio: 16 / 9; max-width: 660px; background: var(--frame); border: 1px dashed var(--line); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .shot span { font-size: 11px; letter-spacing: .04em; color: var(--muted); }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .shot:has(img) { aspect-ratio: auto; border: 0; background: none; display: block; max-width: 860px; }
+  .shot:has(img) img { position: static; height: auto; display: block; }
+  .shot:has(img) span { display: none; }
+  .tldr { margin: 0 0 18px; max-width: 620px; }
+  .tldr b { font-weight: 500; margin-right: 8px; }
+  a.ext { color: var(--accent); border-bottom: 1px solid var(--line); }
+  a.ext:hover { color: var(--text); }
+  .outs { list-style: none; padding: 0; margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+  .outs li { display: grid; grid-template-columns: 76px 1fr; gap: 10px; margin: 4px 0; }
+  .outs li span { font-size: 11px; letter-spacing: .03em; padding-top: 2px; }
+  .gallery { display: grid; gap: 8px; margin: 0 0 22px; max-width: 660px; }
+  .grow { display: grid; gap: 8px; align-items: start; }
+  .grow img { width: 100%; height: auto; display: block; }
+  .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .g1 { grid-template-columns: 1fr; }
+  .gposter { grid-template-columns: 1fr; max-width: 280px; }
+  @media (max-width: 560px) { .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .photo:has(img) .ph { display: none; }
+  .body .inner { max-width: 660px; }
+  .body dl { display: grid; grid-template-columns: 76px 1fr; gap: 8px 14px; margin: 0; }
+  .body dt { font-size: 12px; color: var(--muted); padding-top: 3px; }
+  .body dd { margin: 0; }
+  .body ul { margin: 0; padding-left: 18px; }
+  .body li { margin: 2px 0; }
+  .body .links { margin-top: 14px; display: flex; gap: 18px; font-size: 12px; letter-spacing: .02em; }
+  .body .links a { color: var(--accent); }
+  .body .links a:hover { text-decoration: underline; }
+  @media (max-width: 720px) {
+    details.proj summary { grid-template-columns: 1fr auto 20px; gap: 12px; }
+    .body { grid-template-columns: 1fr; }
+    .body > .spacer { display: none; }
+    .body dl { grid-template-columns: 1fr; gap: 0; }
+    .body dd { margin-bottom: 10px; }
+  }
+
+  /* ---------- skills ---------- */
+  .skills { border-top: 1px solid var(--line); }
+  .skills .row { display: grid; grid-template-columns: 220px 1fr; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .skills .row span:first-child { font-size: 12px; color: var(--muted); padding-top: 3px; }
+  @media (max-width: 720px) { .skills .row { grid-template-columns: 1fr; gap: 2px; } }
+
+  /* ---------- about ---------- */
+  .about { display: grid; grid-template-columns: 320px 1fr; gap: 56px; align-items: start; }
+  .photo { aspect-ratio: 4 / 5; background: var(--frame); border-radius: 4px; overflow: hidden; position: relative; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo .ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: 12px; color: var(--muted); }
+  .about h3 { font-weight: 400; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.03em; margin: 0 0 4px; line-height: 1.2; }
+  .about .role { color: var(--muted); font-size: 13px; margin: 0 0 28px; }
+  .about .bio { margin: 0 0 28px; max-width: 560px; }
+  .info { border-top: 1px solid var(--line); }
+  .info .row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .info .row span:first-child { font-size: 12px; color: var(--muted); padding-top: 2px; }
+  .info a { color: var(--accent); }
+  .info a:hover { text-decoration: underline; }
+  @media (max-width: 760px) { .about { grid-template-columns: 1fr; gap: 28px; } .photo { max-width: 280px; } }
+
+
+  /* ---------- home summary ---------- */
+  .summary { max-width: 900px; margin-top: 14vh; }
+  .sum-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 0 16px; border-bottom: 1px solid var(--line); }
+  .sum-head span { font-size: 22px; letter-spacing: -0.02em; }
+  .sum-head a { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .nrow { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .ntag { font-size: 10px; color: var(--muted); }
+  .nmore { display: block; margin-top: 6px; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .ndate { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .ntext { font-size: 17px; letter-spacing: -0.01em; line-height: 1.5; }
+  .nrow:hover .ntext { color: var(--accent); }
+  @media (max-width: 560px) { .nrow { grid-template-columns: auto 1fr; gap: 2px 14px; } .ntext { grid-column: 1 / -1; } }
+  .sum-head a:hover { color: var(--text); }
+  .srow { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr) 160px; gap: 24px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .sname { font-size: 16px; }
+  .stext { font-size: 13px; color: var(--muted); }
+  .stag { font-size: 11px; color: var(--muted); white-space: nowrap; text-align: right; }
+  .slabel { font-size: 13px; }
+  .stext { color: var(--muted); font-size: 14px; }
+  .srow:hover .slabel, .srow:hover .stext { color: var(--accent); }
+  @media (max-width: 720px) { .srow { grid-template-columns: 1fr auto; gap: 2px 12px; } .stext { grid-column: 1; grid-row: 2; } .stag { grid-row: 1; grid-column: 2; } }
+
+  .group-h { font-weight: 400; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 8vh 0 10px; display: flex; gap: 14px; align-items: baseline; }
+  .group-h span { text-transform: none; letter-spacing: 0; font-size: 12px; opacity: .75; }
+  .page-title + .group-h { margin-top: 4vh; }
+  .sub-h { font-weight: 400; font-size: 22px; letter-spacing: -0.02em; margin: 10vh 0 18px; }
+  .contact { max-width: 900px; padding-top: 4vh; }
+  .c-lead { font-size: 16px; color: var(--muted); margin: 0 0 28px; }
+  .c-mail { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 22px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+  .c-mail a { font-size: clamp(28px, 5.2vw, 60px); letter-spacing: -0.04em; line-height: 1.1; overflow-wrap: anywhere; min-width: 0; }
+  .c-mail a:hover { color: var(--accent); }
+  .c-copy { font: inherit; font-size: 12px; letter-spacing: .03em; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+  .c-copy:hover { color: var(--text); border-color: var(--muted); }
+  .c-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .c-links a { display: flex; flex-direction: column; gap: 6px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .c-links a span:first-child { font-size: 12px; color: var(--muted); }
+  .c-links a span:last-child { font-size: 15px; }
+  .c-links a:hover span:last-child { color: var(--accent); }
+  @media (max-width: 640px) { .c-links { grid-template-columns: 1fr; } }
+  .big-mail { font-size: clamp(30px, 6vw, 72px); letter-spacing: -0.04em; line-height: 1.05; margin: 0 0 36px; overflow-wrap: anywhere; }
+  .big-mail a:hover { color: var(--accent); }
+  .info a { color: var(--accent); }
+
+  footer { padding: 28px 0 40px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="top" id="topbar">
+  <div class="wrap">
+    <a class="brand" href="#home">y_w__</a>
+    <nav class="menu">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#projects" data-page="projects">Projects</a>
+      <a href="#about" data-page="about">About</a>
+      <a href="#contact" data-page="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= HOME ================= -->
+  <section class="page" id="page-home">
+    <div class="hero">
+      <h1>KWON YEWON</h1>
+      <hr class="rule">
+      <p class="lead">AI 시스템을 만들고, 그 답의 근거를 탐구합니다.</p>
+      <p class="kwline">Knowledge Graph · GraphRAG · Retrieval · LLM Systems · Evaluation</p>
+    </div>
+
+
+
+    <div class="summary">
+      <div class="sum-head"><span>News</span><a href="#projects">All projects ↘</a></div>
+      <a class="nrow" href="#projects"><span class="ndate">2026.03 –</span><span class="ntext">V-O — 공간 분석 플랫폼 (졸업 프로젝트)</span></a>
+      <a class="nrow" href="#projects"><span class="ndate">2026.10</span><span class="ntext">지식그래프 스터디 — 검색 비교부터 GraphRAG까지</span></a>
+      <a class="nrow" href="#projects"><span class="ndate">2026.08</span><span class="ntext">Mediary — AI 아바타 일기 서비스</span></a>
+      <a class="nrow" href="#projects"><span class="ndate">2026.06</span><span class="ntext">FingerType — ASL 알파벳 인식 웹 앱</span></a>
+      <a class="nrow" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener"><span class="ndate">2026.01</span><span class="ntext">IJASC 논문 게재 「전통 병풍의 디지털 재현 및 확장 연구」<span class="nmore">See details ↗</span></span></a>
+      <a class="nrow" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener"><span class="ndate">2025.11</span><span class="ntext">디지털 병풍 쇼케이스 · 전주대학교 X Space<span class="nmore">See details ↗</span></span></a>
+      <a class="nrow" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener"><span class="ndate">2025.09</span><span class="ntext">전시 [바람과 병풍] · 아트코리아랩<span class="nmore">See details ↗</span></span></a>
+      <a class="nrow" href="#projects"><span class="ndate">2025.08</span><span class="ntext">화경 / 바람과 병풍 — 인터랙티브 미디어아트 (모온컴퍼니 협업)</span></a>
+      <a class="nrow" href="https://ixr-lab.com/members/" target="_blank" rel="noopener"><span class="ndate">2025.03</span><span class="ntext">IXR Lab 학부 연구원<span class="nmore">See details ↗</span></span></a>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section class="page" id="page-projects">
+    <div class="page-title">
+      <h2>Projects</h2>
+    </div>
+
+    <h3 class="group-h">Projects</h3>
+    <div class="list">
+
+      <details class="proj">
+        <summary>
+          <div class="main">
+            <h4>V-O</h4>
+            <p class="one">iOS 공간 스캔 데이터를 최적화해 VR에서 조회·편집할 수 있게 연결한 공간 분석 플랫폼 (졸업 프로젝트)</p>
+            <ul class="tags"><li>FastAPI</li><li>AWS EC2 · RDS · S3</li><li>PostgreSQL</li><li>가구 배치 최적화</li><li>RAG</li></ul>
+          </div>
+          <span class="st ing">진행 중</span>
+          <span class="tog">+</span>
+        </summary>
+        <div class="body">
+          <div class="inner">
+            <div class="gallery">
+              <div class="grow g4"><img src="img/vo_ios1.png" alt="V-O iOS · VR 화면" loading="lazy"><img src="img/vo_ios2.png" alt="V-O iOS · VR 화면" loading="lazy"><img src="img/vo_ios3.png" alt="V-O iOS · VR 화면" loading="lazy"><img src="img/vo_ios4.png" alt="V-O iOS · VR 화면" loading="lazy"></div>
+              <div class="grow g2"><img src="img/vo_vr1.png" alt="V-O iOS · VR 화면" loading="lazy"><img src="img/vo_vr2.png" alt="V-O iOS · VR 화면" loading="lazy"></div>
+            </div>
+            <dl>
+              <dt>Period</dt>
+              <dd>2026.03 –</dd>
+              <dt>Stack</dt>
+              <dd>Python · FastAPI · AWS (EC2, RDS, S3) · PostgreSQL</dd>
+              <dt>My part</dt>
+              <dd>
+                <ul>
+                  <li>FastAPI 백엔드 API 구현 — S3 기반 공간 데이터 저장, 버전 · 처리 상태 관리</li>
+                  <li>AWS 인프라 구성과 운영 — EC2 · RDS · S3 기반 서버, 최적화 파이프라인 EC2 통합</li>
+                  <li>가구 배치 최적화 로직 구현 — 평면 분석 기반 배치 원칙 추출, 최적화 연산</li>
+                  <li>GitHub Flow 브랜치 전략, PR 협업, GitHub Actions 자동 배포 운영</li>
+                  <li>건축 설계 기준 문서에서 배치 규칙을 추출하는 RAG 파이프라인 로컬 구현 중</li>
+                </ul>
+              </dd>
+              <dt>Point</dt>
+              <dd>Step Functions + ECS Fargate로 분리돼 있던 최적화 실행을 EC2로 통합 → 관리 리소스 5종 → EC2 1대, 로그 하나로 요청부터 완료까지 추적</dd>
+            </dl>
+            <div class="links"><a href="#">GITHUB ↗</a></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="proj">
+        <summary>
+          <div class="main">
+            <h4>Mediary</h4>
+            <p class="one">채팅으로 하루를 기록하고 기억으로 연결하는 개인 맞춤형 AI 아바타 일기 서비스</p>
+            <ul class="tags"><li>FastAPI</li><li>pgvector</li><li>CLOVA Studio</li><li>LLM</li></ul>
+          </div>
+          <span class="st done">완료</span>
+          <span class="tog">+</span>
+        </summary>
+        <div class="body">
+          <div class="inner">
+            <div class="gallery">
+              <div class="grow g2"><img src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div>
+            </div>
+            <dl>
+              <dt>Period</dt>
+              <dd>2026.07 – 2026.08</dd>
+              <dt>Stack</dt>
+              <dd>Python · FastAPI · PostgreSQL (pgvector) · CLOVA Studio · Streamlit</dd>
+              <dt>My part</dt>
+              <dd>
+                <ul>
+                  <li>일기 챗봇 파이프라인 — 텍스트 · 사진 · 음성 입력 처리와 CLOVA Studio 대화, 일기 생성 흐름 연결</li>
+                  <li>일기 품질 규칙과 확인 단계 — 원문 근거 기반 감정 반영, 사람 · 장소 · 감정 정보 확인을 백엔드 로직으로 구성</li>
+                  <li>일기 버전 · 승인 흐름 — 후보 생성, 선택, 확정, 승인본 저장, DB 연동</li>
+                </ul>
+              </dd>
+              <dt>Point</dt>
+              <dd>LLM JSON 필드 누락으로 API 중단 → 스키마 검증 · 복구 처리 추가, 추출은 모델 · 판단은 백엔드로 역할 분리</dd>
+            </dl>
+            <div class="links"><a href="#">GITHUB ↗</a></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="proj">
+        <summary>
+          <div class="main">
+            <h4>FingerType</h4>
+            <p class="one">웹캠 · 동영상에서 ASL 알파벳을 인식해 텍스트로 변환하는 웹 앱</p>
+            <ul class="tags"><li>YOLOv8n</li><li>MediaPipe</li><li>Roboflow</li><li>Streamlit</li></ul>
+          </div>
+          <span class="st done">완료</span>
+          <span class="tog">+</span>
+        </summary>
+        <div class="body">
+          <div class="inner">
+            <figure class="shot">
+              <img src="img/fingertype.png" alt="FingerType 실행 화면" loading="lazy" onerror="this.remove()">
+              <span>IMAGE — img/fingertype.png</span>
+            </figure>
+            <dl>
+              <dt>Period</dt>
+              <dd>2026.05 – 2026.06</dd>
+              <dt>Stack</dt>
+              <dd>Python · YOLOv8n · MediaPipe · OpenCV · Streamlit (webrtc) · Roboflow</dd>
+              <dt>My part</dt>
+              <dd>
+                <ul>
+                  <li>정적 알파벳(A–Y) YOLOv8n 모델 재학습 — Roboflow 데이터셋 버전별 augmentation · 샘플 구성 변경</li>
+                  <li>웹캠 테스트에서 반복 혼동된 글자에 직접 촬영 데이터 보강</li>
+                  <li>Streamlit UI — 실시간 웹캠 · 동영상 업로드 인식, 신뢰도 · 글자 확정 프레임 조정</li>
+                </ul>
+              </dd>
+              <dt>Point</dt>
+              <dd>데이터셋 6개 버전을 mAP50 · mAP50-95 · latency로 비교 — 직접 촬영 데이터 추가 시 val mAP50 0.946 → 0.968</dd>
+            </dl>
+            <div class="links"><a href="https://github.com/e0ng/FingerType" target="_blank" rel="noopener">GITHUB ↗</a></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="proj">
+        <summary>
+          <div class="main">
+            <h4>화경 / 바람과 병풍</h4>
+            <p class="one">AI로 생성한 병풍 배경과 사용자가 채색한 3D 동물이 실시간으로 상호작용하는 인터랙티브 미디어아트 (모온컴퍼니 협업)</p>
+            <ul class="tags"><li>Stable Diffusion LoRA</li><li>Unity (C#)</li><li>UDP</li></ul>
+          </div>
+          <span class="st done">완료</span>
+          <span class="tog">+</span>
+        </summary>
+        <div class="body">
+          <div class="inner">
+            <div class="gallery">
+              <div class="grow g1"><img src="img/media-art.jpg" alt="화경 / 바람과 병풍 전시 공간" loading="lazy"></div>
+            </div>
+            <dl>
+              <dt>Period</dt>
+              <dd>2025.06 – 2025.08</dd>
+              <dt>Stack</dt>
+              <dd>Python · Stable Diffusion v1.5 (LoRA) · Unity (C#) · UDP · Plastic SCM</dd>
+              <dt>My part</dt>
+              <dd>
+                <ul>
+                  <li>민화 · 명소 이미지 약 40장 수집 · 전처리, LoRA 공동 학습과 강도값 비교</li>
+                  <li>터치스크린 앱 제작 — 동물 선택, 채색, 저장, 전송</li>
+                  <li>터치스크린 앱과 병풍 디스플레이 앱 간 UDP 통신 구현</li>
+                </ul>
+              </dd>
+              <dt>Point</dt>
+              <dd>두 앱이 저장 · 반영 시점을 서로 모르던 문제 → 데이터(공유 폴더)와 알림(UDP) 분리, 수신 큐 + ACK로 "전송 완료" 표시까지 연동</dd>
+              <dt>Exhibition</dt>
+              <dd><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 2025.09.12 – 09.25<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
+            </dl>
+            <div class="links"><a href="#">GITHUB ↗</a></div>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <h3 class="group-h">Publication</h3>
+    <div class="list">
+
+      <details class="proj">
+        <summary>
+          <div class="main">
+            <h4>전통 병풍의 디지털 재현 및 확장 연구: 디지털 병풍 사례를 중심으로</h4>
+            <p class="one">IJASC (The International Journal of Advanced Smart Convergence) · 2025, vol.14, no.4 · 3저자</p>
+            <ul class="tags"><li>Generative AI</li><li>LoRA Fine-Tuning</li><li>Stable Diffusion</li><li>Digital Heritage</li></ul>
+          </div>
+          <span class="st done">게재</span>
+          <span class="tog">+</span>
+        </summary>
+        <div class="body">
+          <div class="inner">
+            <div class="gallery"><div class="grow gposter"><img src="img/art-korea-lab.jpg" alt="[바람과 병풍] 전시 포스터" loading="lazy"></div></div>
+            <p class="tldr"><b>TL;DR</b> 민화 산수 이미지 70장으로 Stable Diffusion v1.5에 LoRA를 학습해 전통 병풍을 디지털로 재현 · 확장하는 재현 가능한 생성형 AI 프레임워크를 제안하고, 산 · 물 · 통합 장면 세 작품으로 전시한 연구. IXR Lab 학부 연구원(25.03 – 25.12)으로 참여.</p>
+            <dl>
+              <dt>Paper</dt>
+              <dd><a class="ext" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener">DOI 10.7236/IJASC.2025.14.4.305 ↗</a> · <a class="ext" href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003288670" target="_blank" rel="noopener">KCI ↗</a></dd>
+              <dt>Authors</dt>
+              <dd>김영호, 한정현, <b>권예원</b>, 김연우, 유다희</dd>
+              <dt>Journal</dt>
+              <dd>The International Journal of Advanced Smart Convergence (IJASC), 2025, vol.14, no.4, pp.305–312 · 국제인공지능학회</dd>
+              <dt>Award</dt>
+              <dd>2025학년도 덕성여자대학교 과학기술대학 학술제 우수상 (3인 팀)</dd>
+              <dt>Point</dt>
+              <dd>CLIP 유사도(코사인 0.985) 기반 중복 이미지 제거 · ViT 태깅 후 LoRA 학습, Sampling Steps · CFG 조합 비교로 25 steps · CFG 7.0–7.5 구간 도출</dd>
+              <dt>My part</dt>
+              <dd>
+                <ul>
+                  <li>민화 이미지 수집 · 전처리 — CLIP 유사도 기반 중복 제거, ViT 태깅 후 수동 보정</li>
+                  <li>오픈소스 학습 코드(kohya-colab) 기반 LoRA 학습 설정 · 학습량 계산</li>
+                  <li>프롬프트 설계와 Sampling Steps · CFG Scale 파라미터 실험</li>
+                  <li>AI 영상 제작 — Gemini · Deevid AI 비교, 고정 카메라 루프 영상 생성</li>
+                  <li>전시 구성, 논문 · 학술제 발표 자료 작성</li>
+                </ul>
+              </dd>
+              <dt>Exhibition</dt>
+              <dd><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 2025.09.12 – 09.25<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
+            </dl>
+          </div>
+        </div>
+      </details>
+
+    </div>
+
+    <h3 class="group-h">Study</h3>
+    <div class="list">
+
+      <details class="proj">
+        <summary>
+          <div class="main">
+            <h4>지식그래프 스터디</h4>
+            <p class="one">개인 대화 데이터로 검색 비교 → 지식 그래프 구축 → GraphRAG 에이전트까지 단계별 구현</p>
+            <ul class="tags"><li>BM25</li><li>pgvector</li><li>RDF</li><li>Neo4j</li><li>Cypher</li><li>GraphRAG</li></ul>
+          </div>
+          <span class="st ing">진행 중</span>
+          <span class="tog">+</span>
+        </summary>
+        <div class="body">
+          <div class="inner">
+            <figure class="shot">
+              <img src="img/kg-study.png" alt="지식그래프 스터디 이미지" loading="lazy" onerror="this.remove()">
+              <span>IMAGE — img/kg-study.png</span>
+            </figure>
+            <dl>
+              <dt>Context</dt>
+              <dd>채팅 · Notion 데이터에서 "문서"가 아니라 "사실과 관계"를 찾는 지식 DB를 목표로 하는 스터디.</dd>
+              <dt>Done</dt>
+              <dd>
+                <ul>
+                  <li>카카오톡 채팅 데이터에 grep / Elasticsearch BM25 / pgvector 검색 구현 및 비교, Recall@K 평가셋 구성</li>
+                  <li>미니 온톨로지(클래스 · 술어) 설계 후 LLM으로 근거 스팬과 함께 트리플 추출</li>
+                  <li>추출 결과를 Postgres(엔티티 · 엣지 · 근거) 테이블과 Turtle 파일로 저장, Neo4j에 MERGE로 적재</li>
+                  <li>Cypher 가변 길이 경로로 벡터 검색이 못 답한 다중 홉 질문 질의</li>
+                  <li>검색 에이전트에 그래프 리트리버를 붙여 v1(하이브리드 검색) vs v2(GraphRAG) 비교, Text2Cypher 시도</li>
+                </ul>
+              </dd>
+            </dl>
+            <div class="links"><a href="#">GITHUB ↗</a></div>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+
+
+
+
+  <!-- ================= ABOUT ================= -->
+  <section class="page" id="page-about">
+    <div class="page-title">
+      <h2>About</h2>
+    </div>
+    <div class="about">
+      <div class="photo">
+        <img src="img/profile-web.jpg" alt="KWON YEWON 프로필 사진" onerror="this.remove()">
+        <span class="ph">profile.jpg</span>
+      </div>
+      <div>
+        <h3>KWON YEWON</h3>
+        <p class="role">Prospective graduate student · Knowledge-grounded &amp; Trustworthy AI</p>
+        <p class="bio">
+          미디어아트, 공간 데이터 플랫폼, LLM 서비스를 만들며 데이터 처리와 AI 연동을 맡아 왔습니다.
+          LLM 서비스에서 모델이 필수 정보를 빠뜨리는 문제를 겪은 뒤 AI가 어떤 근거로 답하는지에 관심이 생겼고,
+          이후 검색과 지식그래프를 직접 공부하고 있습니다.
+          앞으로는 AI가 올바른 근거를 찾아 답하게 만드는 검색과 지식 구조를 깊이 연구하고 싶습니다.
+        </p>
+        <div class="info">
+          <div class="row"><span>Education</span><span>덕성여자대학교 IT미디어공학과<br>2027.02 졸업 예정<br>GPA 4.1 / 4.5 · 학과 수석 (2023-2, 2026-1)</span></div>
+          <div class="row"><span>Interests</span><span>Graph-based retrieval, GraphRAG, Trustworthy LLM agents</span></div>
+          <div class="row"><span>Based in</span><span>Seoul Area, Korea</span></div>
+          <div class="row"><span>GitHub</span><span><a href="https://github.com/e0ng">github.com/e0ng</a></span></div>
+          <div class="row"><span>CV</span><span><a href="#">Download PDF ↗</a></span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Experience &amp; Achievements</h3>
+    <div class="list">
+      <div class="item">
+        <div class="left"><span>25.03 – 25.12</span></div>
+        <div>
+          <h4><a class="ext" href="https://ixr-lab.com/members/" target="_blank" rel="noopener">IXR Lab ↗</a> 학부 연구원 — 전통 병풍 디지털 재현 연구</h4>
+          <p class="sub">Interactive eXperience Research Lab · 덕성여자대학교 김영호 교수 연구실 (현재 서울여자대학교로 이전) · XR 인터랙션, 생성형 AI, 인터랙티브 미디어</p>
+          <ul class="outs">
+            <li><span>Paper</span><div><a class="ext" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener">「전통 병풍의 디지털 재현 및 확장 연구: 디지털 병풍 사례를 중심으로」 ↗</a> · IJASC · 3저자 · 26.01</div></li>
+            <li><span>Award</span><div>과학기술대학 학술제 우수상 · 덕성여자대학교 · 2025</div></li>
+            <li><span>Exhibition</span><div><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 25.09<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 25.11</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="item">
+        <div class="left"><span>25.06 – 25.08</span></div>
+        <div><h4>인터랙티브 미디어아트 [화경 / 바람과 병풍] · 모온컴퍼니 협업</h4><p class="sub">LoRA 학습 데이터 구축 · 터치스크린 앱 · UDP 통신 담당</p></div>
+      </div>
+      <div class="item">
+        <div class="left"><span>24.11 – 26.02</span></div>
+        <div><h4><a class="ext" href="https://dcoinstitute.com" target="_blank" rel="noopener">디자인 글로벌 코딩학원 ↗</a> 강사</h4><p class="sub">Python · Java · Arduino · App Inventor 기초 교육 보조, 학생 프로젝트 디버깅 지도</p></div>
+      </div>
+      <div class="item">
+        <div class="left"><span>24.09</span></div>
+        <div><h4>SQL 개발자 (SQLD)</h4><p class="sub">한국데이터산업진흥원</p></div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Skills</h3>
+    <div class="skills">
+      <div class="row"><span>Languages · Frameworks</span><span>Python (FastAPI), Java (Spring Boot), SQL, Unity (C#)</span></div>
+      <div class="row"><span>Database · Cloud</span><span>AWS (EC2, RDS, S3), CDK, PostgreSQL (pgvector), MySQL</span></div>
+      <div class="row"><span>AI · Retrieval</span><span>CLOVA Studio (HCX), RAG, BM25 (Elasticsearch), Neo4j, Stable Diffusion LoRA, YOLOv8, MediaPipe</span></div>
+      <div class="row"><span>Tools</span><span>Git, GitHub Actions, Codex, Claude Code</span></div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="page" id="page-contact">
+    <div class="page-title">
+      <h2>Contact</h2>
+    </div>
+
+    <div class="contact">
+      <p class="c-lead">연구 · 프로젝트 관련 이야기라면 언제든 편하게 연락 주세요.</p>
+
+      <div class="c-mail">
+        <a href="mailto:aliceywkwon@naver.com">aliceywkwon@naver.com</a>
+        <button type="button" id="copyMail" class="c-copy" aria-live="polite">Copy</button>
+      </div>
+
+      <div class="c-links">
+        <a href="https://github.com/e0ng" target="_blank" rel="noopener"><span>GitHub</span><span>github.com/e0ng ↗</span></a>
+        <a href="#about"><span>About</span><span>경력 · 기술 스택 →</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 KWON YEWON</span>
+    <span>Last updated 2026.10</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById("copyMail");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); };
+      try { navigator.clipboard.writeText("aliceywkwon@naver.com").then(done, function () {}); } catch (e) {}
+    });
+  })();
+  (function () {
+    var pages = ["home", "projects", "about", "contact"];
+    var links = document.querySelectorAll(".menu a");
+    var bar = document.getElementById("topbar");
+
+    function show() {
+      var key = (location.hash || "#home").slice(1);
+      if (pages.indexOf(key) === -1) key = "home";
+      pages.forEach(function (p) {
+        var el = document.getElementById("page-" + p);
+        if (el) el.classList.toggle("active", p === key);
+      });
+      links.forEach(function (a) { a.classList.toggle("active", a.dataset.page === key); });
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("hashchange", show);
+    window.addEventListener("scroll", function () { bar.classList.toggle("scrolled", window.scrollY > 4); });
+    show();
+  })();
+</script>
+
+</body>
+</html>
