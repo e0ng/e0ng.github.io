@@ -45,6 +45,8 @@
   .top.scrolled { border-bottom-color: var(--line); }
   .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
   .brand { font-size: 12px; font-weight: 500; letter-spacing: .02em; white-space: nowrap; }
+  .logo { position: relative; display: inline-block; font-size: 15px; font-weight: 400; letter-spacing: -0.04em; line-height: 1; padding: 0 1px; }
+  .logo::after { content: ""; position: absolute; left: 0; right: 0; top: 58%; height: 1px; background: currentColor; }
   .menu { display: flex; gap: 22px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; overflow-x: auto; scrollbar-width: none; }
   .menu::-webkit-scrollbar { display: none; }
   .menu a { color: var(--muted); white-space: nowrap; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .15s, border-color .15s; }
@@ -76,6 +78,8 @@
   .hero .meta { font-size: 11px; line-height: 1.55; color: var(--text); margin: 14px 0 0; }
   .stmt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: end; max-width: 900px; margin-top: 16vh; }
   .stmt .ko { font-size: 13px; line-height: 1.7; max-width: 300px; margin: 0; }
+  .hero .lead { max-width: none; }
+  @media (max-width: 640px) { .br-d { display: none; } }
   .kwline { font-size: 12px; letter-spacing: .01em; color: var(--muted); margin: 12px 0 0; }
   .slab { display: block; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
   .stmt .en { font-size: 13px; line-height: 1.7; text-align: right; margin: 0; }
@@ -234,7 +238,7 @@
 
 <header class="top" id="topbar">
   <div class="wrap">
-    <a class="brand" href="#home">y_w__</a>
+    <a class="brand" href="#home" aria-label="kwon yewon, home"><span class="logo">kwon yewon</span></a>
     <nav class="menu">
       <a href="#home" data-page="home">Home</a>
       <a href="#projects" data-page="projects">Projects</a>
@@ -260,10 +264,11 @@
     <div class="summary">
       <div class="sum-head"><span>News</span><a href="#projects">All projects ↘</a></div>
       <a class="nrow" href="#projects"><span class="ndate">2026.03 –</span><span class="ntext">V-O — 공간 분석 플랫폼 (졸업 프로젝트)</span></a>
-      <a class="nrow" href="#projects"><span class="ndate">2026.10</span><span class="ntext">지식그래프 스터디 — 검색 비교부터 GraphRAG까지</span></a>
+      <a class="nrow" href="#projects"><span class="ndate">2026.09 –</span><span class="ntext">지식그래프 스터디 — 검색 비교부터 GraphRAG까지</span></a>
       <a class="nrow" href="#projects"><span class="ndate">2026.08</span><span class="ntext">Mediary — AI 아바타 일기 서비스</span></a>
       <a class="nrow" href="#projects"><span class="ndate">2026.06</span><span class="ntext">FingerType — ASL 알파벳 인식 웹 앱</span></a>
       <a class="nrow" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener"><span class="ndate">2026.01</span><span class="ntext">IJASC 논문 게재 「전통 병풍의 디지털 재현 및 확장 연구」<span class="nmore">See details ↗</span></span></a>
+      <a class="nrow" href="#projects"><span class="ndate">2025.11</span><span class="ntext">과학기술대학 학술제 우수상 — 전통 병풍 디지털 재현 연구</span></a>
       <a class="nrow" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener"><span class="ndate">2025.11</span><span class="ntext">디지털 병풍 쇼케이스 · 전주대학교 X Space<span class="nmore">See details ↗</span></span></a>
       <a class="nrow" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener"><span class="ndate">2025.09</span><span class="ntext">전시 [바람과 병풍] · 아트코리아랩<span class="nmore">See details ↗</span></span></a>
       <a class="nrow" href="#projects"><span class="ndate">2025.08</span><span class="ntext">화경 / 바람과 병풍 — 인터랙티브 미디어아트 (모온컴퍼니 협업)</span></a>
@@ -287,7 +292,6 @@
             <p class="one">iOS 공간 스캔 데이터를 최적화해 VR에서 조회·편집할 수 있게 연결한 공간 분석 플랫폼 (졸업 프로젝트)</p>
             <ul class="tags"><li>FastAPI</li><li>AWS EC2 · RDS · S3</li><li>PostgreSQL</li><li>가구 배치 최적화</li><li>RAG</li></ul>
           </div>
-          <span class="st ing">진행 중</span>
           <span class="tog">+</span>
         </summary>
         <div class="body">
@@ -307,14 +311,14 @@
                   <li>AWS 인프라 구성과 운영 — EC2 · RDS · S3 기반 서버, 최적화 파이프라인 EC2 통합</li>
                   <li>가구 배치 최적화 로직 구현 — 평면 분석 기반 배치 원칙 추출, 최적화 연산</li>
                   <li>GitHub Flow 브랜치 전략, PR 협업, GitHub Actions 자동 배포 운영</li>
-                  <li>건축 설계 기준 문서에서 배치 규칙을 추출하는 RAG 파이프라인 로컬 구현 중</li>
+                  <li>건축 설계 자료에서 배치 규칙을 찾는 RAG 파이프라인 구현 — 문서 임베딩(BGE-M3)과 pgvector · 전문 검색을 결합한 하이브리드 검색</li>
                 </ul>
               </dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
                   <li><span>문제</span><span>규칙 기반 최적화만으로는 의자 – 테이블 매칭, 벽 부착, 창문 · 문 주변 공간처럼 사람의 판단이 필요한 배치 품질 문제가 남음</span></li>
-                  <li><span>해결</span><span>Gemini API로 방 구조 · 가구 정보에서 "어떤 의자를 어느 테이블에 둘지", "어떤 가구를 벽에 붙일지" 같은 배치 조건을 생성해 최적화 로직에 반영, 평면도로 기존 결과와 비교하며 반복 조정</span></li>
+                  <li><span>해결</span><span>규칙 기반 배치가 실패했을 때 Claude API로 방 구조 · 가구 정보에서 "어떤 의자를 어느 테이블에 둘지", "어떤 가구를 벽에 붙일지" 같은 배치 조건을 생성해 최적화 로직에 보조 제약으로 반영, 평면도로 기존 결과와 비교하며 반복 조정</span></li>
                   <li><span>결과</span><span>AI는 사람처럼 판단해야 하는 조건만 만들고, 충돌 · 거리 · 회전 계산은 기존 최적화 로직이 맡는 구조로 정리</span></li>
                 </ul>
               </dd>
@@ -472,10 +476,12 @@
               <dd><a class="ext" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener">DOI 10.7236/IJASC.2025.14.4.305 ↗</a> · <a class="ext" href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003288670" target="_blank" rel="noopener">KCI ↗</a></dd>
               <dt>Authors</dt>
               <dd>김영호, 한정현, <b>권예원</b>, 김연우, 유다희</dd>
+              <dt>Title (EN)</dt>
+              <dd>A Study on the Generative AI Reproduction of Traditional Folding Screens: Focusing on Digital Folding Screen</dd>
               <dt>Journal</dt>
               <dd>The International Journal of Advanced Smart Convergence (IJASC), 2025, vol.14, no.4, pp.305–312 · 국제인공지능학회</dd>
               <dt>Award</dt>
-              <dd>2025학년도 덕성여자대학교 과학기술대학 학술제 우수상 (3인 팀)</dd>
+              <dd>2025학년도 덕성여자대학교 과학기술대학 학술제 우수상 (3인 팀) · 2025.11</dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
@@ -519,8 +525,10 @@
         <div class="body">
           <div class="inner">
             <dl>
+              <dt>Period</dt>
+              <dd>2026.09 –</dd>
               <dt>Context</dt>
-              <dd>채팅 · Notion 데이터에서 "문서"가 아니라 "사실과 관계"를 찾는 지식 DB를 목표로 하는 스터디.</dd>
+              <dd>Cloud Club 10기 스터디. 채팅 · Notion 데이터에서 "문서"가 아니라 "사실과 관계"를 찾는 지식 DB를 목표로 함.</dd>
               <dt>Done</dt>
               <dd>
                 <ul>
@@ -568,7 +576,7 @@
           <div class="row"><span>Interests</span><span>Graph-based retrieval, GraphRAG, Trustworthy LLM agents</span></div>
           <div class="row"><span>Based in</span><span>Seoul Area, Korea</span></div>
           <div class="row"><span>GitHub</span><span><a href="https://github.com/e0ng">github.com/e0ng</a></span></div>
-          <div class="row"><span>CV</span><span><a href="#">Download PDF ↗</a></span></div>
+          <div class="row"><span>CV</span><span><a href="KWON_YEWON_CV.pdf" target="_blank" rel="noopener">Download PDF ↗</a></span></div>
         </div>
       </div>
     </div>
@@ -590,7 +598,7 @@
           <p class="sub">Interactive eXperience Research Lab · 덕성여자대학교 김영호 교수 연구실 (현재 서울여자대학교로 이전) · XR 인터랙션, 생성형 AI, 인터랙티브 미디어</p>
           <ul class="outs">
             <li><span>Paper</span><div><a class="ext" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener">「전통 병풍의 디지털 재현 및 확장 연구: 디지털 병풍 사례를 중심으로」 ↗</a> · IJASC · 3저자 · 26.01</div></li>
-            <li><span>Award</span><div>과학기술대학 학술제 우수상 · 덕성여자대학교 · 2025</div></li>
+            <li><span>Award</span><div>과학기술대학 학술제 우수상 · 덕성여자대학교 · 25.11</div></li>
             <li><span>Exhibition</span><div><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 25.09<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 25.11</div></li>
           </ul>
         </div>
