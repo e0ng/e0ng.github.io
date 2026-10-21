@@ -215,16 +215,16 @@
   .sub-h { font-weight: 400; font-size: 22px; letter-spacing: -0.02em; margin: 10vh 0 18px; }
   .contact { max-width: 900px; padding-top: 4vh; }
   .c-lead { font-size: 16px; color: var(--muted); margin: 0 0 28px; }
-  .c-mail { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 22px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
-  .c-mail a { font-size: clamp(28px, 5.2vw, 60px); letter-spacing: -0.04em; line-height: 1.1; overflow-wrap: anywhere; min-width: 0; }
-  .c-mail a:hover { color: var(--accent); }
-  .c-copy { font: inherit; font-size: 12px; letter-spacing: .03em; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
-  .c-copy:hover { color: var(--text); border-color: var(--muted); }
   .c-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .c-links a { display: flex; flex-direction: column; gap: 6px; padding: 22px 0; border-bottom: 1px solid var(--line); }
-  .c-links a span:first-child { font-size: 12px; color: var(--muted); }
-  .c-links a span:last-child { font-size: 15px; }
-  .c-links a:hover span:last-child { color: var(--accent); }
+  .c-links > a { display: flex; flex-direction: column; gap: 6px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .c-links > a span:first-child { font-size: 12px; color: var(--muted); }
+  .c-links > a span:last-child { font-size: 15px; }
+  .c-big { display: flex; flex-direction: column; gap: 8px; padding: 28px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+  .c-big .c-label { font-size: 12px; color: var(--muted); }
+  .c-big .c-val { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px; }
+  .c-big .c-val a { font-size: clamp(20px, 2.6vw, 30px); letter-spacing: -0.02em; line-height: 1.25; overflow-wrap: anywhere; min-width: 0; }
+  .c-big .c-val a:hover { color: var(--accent); }
+  .c-links > a:hover span:last-child { color: var(--accent); }
   @media (max-width: 640px) { .c-links { grid-template-columns: 1fr; } }
   .big-mail { font-size: clamp(30px, 6vw, 72px); letter-spacing: -0.04em; line-height: 1.05; margin: 0 0 36px; overflow-wrap: anywhere; }
   .big-mail a:hover { color: var(--accent); }
@@ -636,12 +636,9 @@
     <div class="contact">
       <p class="c-lead">연구 · 프로젝트 관련 이야기라면 언제든 편하게 연락 주세요.</p>
 
-      <div class="c-mail">
-        <a href="mailto:aliceywkwon@naver.com">aliceywkwon@naver.com</a>
-        <button type="button" id="copyMail" class="c-copy" aria-live="polite">Copy</button>
-      </div>
-
       <div class="c-links">
+        <div class="c-big"><span class="c-label">Email</span><span class="c-val"><a href="mailto:aliceywkwon@naver.com">aliceywkwon@naver.com</a></span></div>
+        <div class="c-big"><span class="c-label">Phone</span><span class="c-val"><a href="tel:+821089348757">+82 10 8934 8757</a></span></div>
         <a href="https://github.com/e0ng" target="_blank" rel="noopener"><span>GitHub</span><span>github.com/e0ng ↗</span></a>
         <a href="#about"><span>About</span><span>경력 · 기술 스택 →</span></a>
       </div>
@@ -658,14 +655,6 @@
 </footer>
 
 <script>
-  (function () {
-    var btn = document.getElementById("copyMail");
-    if (!btn) return;
-    btn.addEventListener("click", function () {
-      var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); };
-      try { navigator.clipboard.writeText("aliceywkwon@naver.com").then(done, function () {}); } catch (e) {}
-    });
-  })();
   (function () {
     var pages = ["home", "projects", "about", "contact"];
     var links = document.querySelectorAll(".menu a");
