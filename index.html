@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KWON YEWON — Portfolio</title>
-<meta name="description" content="검색과 LLM 시스템을 만들어 온 대학원 지원자의 포트폴리오.">
+<meta name="description" content="그래픽스와 생성 AI로 공간과 장면을 다뤄 온 대학원 지원자의 포트폴리오.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
@@ -255,15 +255,15 @@
     <div class="hero">
       <h1>KWON YEWON</h1>
       <hr class="rule">
-      <p class="lead">AI를 활용한 시스템을 개발해 왔으며, 이제 그 답의 근거를 연구하고자 합니다.</p>
-      <p class="kwline">Knowledge Graph · GraphRAG · Retrieval · LLM Systems · Evaluation</p>
+      <p class="lead">보이지 않는 구조를 설계해 보이는 장면으로 만듭니다.</p>
+      <p class="kwline">Computer Graphics · Generative AI · 3D Vision · XR</p>
     </div>
 
 
 
     <div class="summary">
       <div class="sum-head"><span>News</span><a href="#projects">All projects ↘</a></div>
-      <a class="nrow" href="#projects"><span class="ndate">2026.03 –</span><span class="ntext">V-O — 공간 분석 플랫폼 (졸업 프로젝트)</span></a>
+      <a class="nrow" href="#projects"><span class="ndate">2026.03 –</span><span class="ntext">V-O — 실내 공간 스캔을 VR 편집으로 잇는 공간 분석 플랫폼 (졸업 프로젝트)</span></a>
       <a class="nrow" href="#projects"><span class="ndate">2026.09 –</span><span class="ntext">지식그래프 스터디 — 검색 비교부터 GraphRAG까지</span></a>
       <a class="nrow" href="#projects"><span class="ndate">2026.08</span><span class="ntext">Mediary — AI 아바타 일기 서비스</span></a>
       <a class="nrow" href="#projects"><span class="ndate">2026.06</span><span class="ntext">FingerType — ASL 알파벳 인식 웹 앱</span></a>
@@ -289,8 +289,8 @@
         <summary>
           <div class="main">
             <h4>V-O</h4>
-            <p class="one">iOS 공간 스캔 데이터를 최적화해 VR에서 조회·편집할 수 있게 연결한 공간 분석 플랫폼 (졸업 프로젝트)</p>
-            <ul class="tags"><li>FastAPI</li><li>AWS EC2 · RDS · S3</li><li>PostgreSQL</li><li>가구 배치 최적화</li><li>RAG</li></ul>
+            <p class="one">iOS로 스캔한 실내 공간을 VR로 옮기고, LLM이 만든 배치 조건과 최적화 로직으로 가구 배치를 조회 · 편집하는 공간 분석 플랫폼 (졸업 프로젝트)</p>
+            <ul class="tags"><li>공간 스캔</li><li>VR</li><li>LLM 배치 조건</li><li>가구 배치 최적화</li><li>RAG</li></ul>
           </div>
           <span class="tog">+</span>
         </summary>
@@ -307,11 +307,10 @@
               <dt>My part</dt>
               <dd>
                 <ul>
-                  <li>FastAPI 백엔드 API 구현 — S3 기반 공간 데이터 저장, 버전 · 처리 상태 관리</li>
-                  <li>AWS 인프라 구성과 운영 — EC2 · RDS · S3 기반 서버, 최적화 파이프라인 EC2 통합</li>
                   <li>가구 배치 최적화 로직 구현 — 평면 분석 기반 배치 원칙 추출, 최적화 연산</li>
-                  <li>GitHub Flow 브랜치 전략, PR 협업, GitHub Actions 자동 배포 운영</li>
+                  <li>LLM 기반 배치 조건 생성 — 방 구조 · 가구 정보에서 사람의 판단이 필요한 배치 관계를 만들어 최적화의 보조 제약으로 반영</li>
                   <li>건축 설계 자료에서 배치 규칙을 찾는 RAG 파이프라인 구현 — 문서 임베딩(BGE-M3)과 pgvector · 전문 검색을 결합한 하이브리드 검색</li>
+                  <li>최적화 · 공간 처리 파이프라인을 FastAPI 서버로 묶어 AWS(EC2 · RDS · S3)에 배포 · 운영 — 데이터 버전 · 처리 상태 관리, GitHub Actions 자동 배포</li>
                 </ul>
               </dd>
               <dt>Point</dt>
@@ -322,6 +321,17 @@
                   <li><span>결과</span><span>AI는 사람처럼 판단해야 하는 조건만 만들고, 충돌 · 거리 · 회전 계산은 기존 최적화 로직이 맡는 구조로 정리</span></li>
                 </ul>
               </dd>
+              <dt>Explore</dt>
+              <dd>
+                <p style="margin:0 0 4px">더 사실적인 공간 · 가구 복원을 위해 시도했지만 최종 결과물에는 채택하지 않은 방법들</p>
+                <ul>
+                  <li>영상 기반 3D 공간 복원 — 방 영상을 ffmpeg로 프레임 추출, COLMAP SfM(SIFT 특징점 · 매칭 · 카메라 추정)으로 희소 포인트 클라우드를 만든 뒤 공식 3D Gaussian Splatting 코드로 학습 · 렌더링</li>
+                  <li>3D 객체 분할 전처리 — RoomPlan 스캔(USDZ)을 GLB로 변환하고, Blender 4.4와 호환되지 않던 SAMPart3D 렌더 스크립트를 수정해 16개 시점의 컬러 · 깊이 이미지와 카메라 정보 생성</li>
+                  <li>가구 분리와 3D 생성 — SAM으로 가구 마스크를 만들고 LaMa로 빈 곳을 채운 뒤 Hunyuan3D-2.1로 이미지 → 3D 메시 생성 시도. 가려진 가구 형태를 이어 그리기보다 빈 곳을 무난히 메우는 보간 수준임을 확인</li>
+                </ul>
+              </dd>
+              <dt>Next</dt>
+              <dd>여러 방법으로 방을 3D로 재현해 보며, 가려진 부분은 생성 모델로도 자연스럽게 복원되지 않는다는 한계를 확인했습니다. 이 문제를 그래픽스와 생성 AI로 더 깊이 다뤄 보고 싶어진 계기입니다.</dd>
             </dl>
             <div class="links"><a href="https://github.com/VirtualOptimization/VO-server" target="_blank" rel="noopener">GITHUB ↗</a></div>
           </div>
@@ -331,9 +341,9 @@
       <details class="proj">
         <summary>
           <div class="main">
-            <h4>Mediary</h4>
-            <p class="one">채팅으로 하루를 기록하고 기억으로 연결하는 개인 맞춤형 AI 아바타 일기 서비스</p>
-            <ul class="tags"><li>FastAPI</li><li>pgvector</li><li>CLOVA Studio</li><li>LLM</li></ul>
+            <h4>화경 / 바람과 병풍</h4>
+            <p class="one">AI로 생성한 병풍 배경과 사용자가 채색한 3D 동물이 실시간으로 상호작용하는 인터랙티브 미디어아트 (모온컴퍼니 협업)</p>
+            <ul class="tags"><li>Stable Diffusion LoRA</li><li>Unity (C#)</li><li>3D 인터랙션</li><li>UDP</li></ul>
           </div>
           <span class="st done">완료</span>
           <span class="tog">+</span>
@@ -341,31 +351,33 @@
         <div class="body">
           <div class="inner">
             <div class="gallery">
-              <div class="grow g2"><img src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div>
+              <div class="grow gexh"><img src="img/art-korea-lab1.jpg" alt="[바람과 병풍] 전시 포스터" loading="lazy"><img src="img/art-korea-lab2.jpg" alt="[바람과 병풍] 아트코리아랩 전시 현장" loading="lazy"></div>
+              <div class="grow g1"><img src="img/media-art.jpg" alt="화경 전시 공간" loading="lazy"></div>
             </div>
             <dl>
               <dt>Period</dt>
-              <dd>2026.07 – 2026.08</dd>
+              <dd>2025.06 – 2025.08</dd>
               <dt>Stack</dt>
-              <dd>Python · FastAPI · PostgreSQL (pgvector) · CLOVA Studio · Streamlit</dd>
+              <dd>Python · Stable Diffusion v1.5 (LoRA) · Unity (C#) · UDP · Plastic SCM</dd>
               <dt>My part</dt>
               <dd>
                 <ul>
-                  <li>일기 챗봇 파이프라인 — 텍스트 · 사진 · 음성 입력 처리와 CLOVA Studio 대화, 일기 생성 흐름 연결</li>
-                  <li>일기 품질 규칙과 확인 단계 — 원문 근거 기반 감정 반영, 사람 · 장소 · 감정 정보 확인을 백엔드 로직으로 구성</li>
-                  <li>일기 버전 · 승인 흐름 — 후보 생성, 선택, 확정, 승인본 저장, DB 연동</li>
+                  <li>민화 · 명소 이미지 약 40장 수집 · 전처리, LoRA 공동 학습과 강도값 비교</li>
+                  <li>터치스크린 앱 제작 — 동물 선택, 채색, 저장, 전송</li>
+                  <li>터치스크린 앱과 병풍 디스플레이 앱 간 UDP 통신 구현</li>
                 </ul>
               </dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
-                  <li><span>문제</span><span>AI가 사용자가 말하지 않은 감정을 추론하거나, "여유롭고 좋더라고" 같은 활용형 감정을 문자열 불일치로 제거</span></li>
-                  <li><span>해결</span><span>감정마다 근거가 되는 원문 발췌를 함께 저장하고, 그 발췌가 실제 사용자 입력에 있는지 백엔드에서 검증 · 정상 / 실패 사례 회귀 테스트 추가</span></li>
-                  <li><span>결과</span><span>근거 없는 감정 추측은 차단하고, 직접 표현한 감정은 놓치지 않는 근거 기반 처리 구조 마련</span></li>
+                  <li><span>문제</span><span>터치스크린 앱과 병풍 디스플레이 앱이 따로 실행돼 저장 · 반영 시점을 서로 알 수 없음</span></li>
+                  <li><span>해결</span><span>이미지는 공유 폴더, 알림은 UDP로 분리 · 수신 큐에서 메인 스레드 처리 · ACK 회신</span></li>
+                  <li><span>결과</span><span>전송 후 터치스크린에 "전송 완료" 표시, 디스플레이에 동물 반영</span></li>
                 </ul>
               </dd>
+              <dt>Exhibition</dt>
+              <dd><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 2025.09.12 – 09.25<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
             </dl>
-            <div class="links"><a href="https://github.com/NCP-1st/NCP-Avatar" target="_blank" rel="noopener">GITHUB ↗</a></div>
           </div>
         </div>
       </details>
@@ -412,9 +424,9 @@
       <details class="proj">
         <summary>
           <div class="main">
-            <h4>화경 / 바람과 병풍</h4>
-            <p class="one">AI로 생성한 병풍 배경과 사용자가 채색한 3D 동물이 실시간으로 상호작용하는 인터랙티브 미디어아트 (모온컴퍼니 협업)</p>
-            <ul class="tags"><li>Stable Diffusion LoRA</li><li>Unity (C#)</li><li>UDP</li></ul>
+            <h4>Mediary</h4>
+            <p class="one">채팅으로 하루를 기록하고 기억으로 연결하는 개인 맞춤형 AI 아바타 일기 서비스</p>
+            <ul class="tags"><li>FastAPI</li><li>pgvector</li><li>CLOVA Studio</li><li>LLM</li></ul>
           </div>
           <span class="st done">완료</span>
           <span class="tog">+</span>
@@ -422,33 +434,31 @@
         <div class="body">
           <div class="inner">
             <div class="gallery">
-              <div class="grow gexh"><img src="img/art-korea-lab1.jpg" alt="[바람과 병풍] 전시 포스터" loading="lazy"><img src="img/art-korea-lab2.jpg" alt="[바람과 병풍] 아트코리아랩 전시 현장" loading="lazy"></div>
-              <div class="grow g1"><img src="img/media-art.jpg" alt="화경 전시 공간" loading="lazy"></div>
+              <div class="grow g2"><img src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div>
             </div>
             <dl>
               <dt>Period</dt>
-              <dd>2025.06 – 2025.08</dd>
+              <dd>2026.07 – 2026.08</dd>
               <dt>Stack</dt>
-              <dd>Python · Stable Diffusion v1.5 (LoRA) · Unity (C#) · UDP · Plastic SCM</dd>
+              <dd>Python · FastAPI · PostgreSQL (pgvector) · CLOVA Studio · Streamlit</dd>
               <dt>My part</dt>
               <dd>
                 <ul>
-                  <li>민화 · 명소 이미지 약 40장 수집 · 전처리, LoRA 공동 학습과 강도값 비교</li>
-                  <li>터치스크린 앱 제작 — 동물 선택, 채색, 저장, 전송</li>
-                  <li>터치스크린 앱과 병풍 디스플레이 앱 간 UDP 통신 구현</li>
+                  <li>일기 챗봇 파이프라인 — 텍스트 · 사진 · 음성 입력 처리와 CLOVA Studio 대화, 일기 생성 흐름 연결</li>
+                  <li>일기 품질 규칙과 확인 단계 — 원문 근거 기반 감정 반영, 사람 · 장소 · 감정 정보 확인을 백엔드 로직으로 구성</li>
+                  <li>일기 버전 · 승인 흐름 — 후보 생성, 선택, 확정, 승인본 저장, DB 연동</li>
                 </ul>
               </dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
-                  <li><span>문제</span><span>터치스크린 앱과 병풍 디스플레이 앱이 따로 실행돼 저장 · 반영 시점을 서로 알 수 없음</span></li>
-                  <li><span>해결</span><span>이미지는 공유 폴더, 알림은 UDP로 분리 · 수신 큐에서 메인 스레드 처리 · ACK 회신</span></li>
-                  <li><span>결과</span><span>전송 후 터치스크린에 "전송 완료" 표시, 디스플레이에 동물 반영</span></li>
+                  <li><span>문제</span><span>AI가 사용자가 말하지 않은 감정을 추론하거나, "여유롭고 좋더라고" 같은 활용형 감정을 문자열 불일치로 제거</span></li>
+                  <li><span>해결</span><span>감정마다 근거가 되는 원문 발췌를 함께 저장하고, 그 발췌가 실제 사용자 입력에 있는지 백엔드에서 검증 · 정상 / 실패 사례 회귀 테스트 추가</span></li>
+                  <li><span>결과</span><span>근거 없는 감정 추측은 차단하고, 직접 표현한 감정은 놓치지 않는 근거 기반 처리 구조 마련</span></li>
                 </ul>
               </dd>
-              <dt>Exhibition</dt>
-              <dd><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 2025.09.12 – 09.25<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
             </dl>
+            <div class="links"><a href="https://github.com/NCP-1st/NCP-Avatar" target="_blank" rel="noopener">GITHUB ↗</a></div>
           </div>
         </div>
       </details>
@@ -564,28 +574,31 @@
       </div>
       <div>
         <h3>KWON YEWON</h3>
-        <p class="role">Prospective graduate student · Knowledge-grounded &amp; Trustworthy AI</p>
+        <p class="role">Prospective graduate student · Computer Graphics, Generative AI &amp; XR</p>
         <p class="bio">
-          미디어아트, 공간 데이터 플랫폼, LLM 서비스를 만들며 데이터 처리와 AI 연동을 맡아 왔습니다.
-          LLM 서비스에서 모델이 필수 정보를 빠뜨리는 문제를 겪은 뒤 AI가 어떤 근거로 답하는지에 관심이 생겼고,
-          이후 검색과 지식그래프를 직접 공부하고 있습니다.
-          앞으로는 AI가 올바른 근거를 찾아 답하게 만드는 검색과 지식 구조를 깊이 연구하고 싶습니다.
+          전체 구조를 설계하는 일과 시각적으로 표현하는 일을 모두 좋아합니다.
+          지금까지 생성 모델로 전통 병풍을 재현해 전시하거나, 실내 스캔 데이터를 VR 공간으로 옮기는 프로젝트를 해 왔습니다.
+          두 작업 모두 여러 기술을 엮어 하나의 장면을 만들어 낸다는 점이 인상 깊었습니다.
+          그 과정에서 실제 공간을 3D로 재현하려 했지만, 가려진 부분을 복원하는 데서 한계를 확인했습니다.
+          앞으로는 이 문제를 그래픽스와 생성 AI로 풀어 가는 연구를 하고 싶습니다.
         </p>
         <div class="info">
           <div class="row"><span>Education</span><span>덕성여자대학교 IT미디어공학과<br>2027.02 졸업 예정<br>GPA 4.1 / 4.5 · 학과 수석 (2023-2, 2026-1)</span></div>
-          <div class="row"><span>Interests</span><span>Graph-based retrieval, GraphRAG, Trustworthy LLM agents</span></div>
+          <div class="row"><span>Interests</span><span>Computer graphics, Generative AI for 3D content, 3D reconstruction, XR</span></div>
           <div class="row"><span>Based in</span><span>Seoul Area, Korea</span></div>
           <div class="row"><span>GitHub</span><span><a href="https://github.com/e0ng">github.com/e0ng</a></span></div>
-          <div class="row"><span>CV</span><span><a href="KWON_YEWON_CV.pdf?v=20261017c" target="_blank" rel="noopener">Download PDF ↗</a></span></div>
+          <div class="row"><span>CV</span><span><a href="KWON_YEWON_CV_spatial.pdf?v=20261020" target="_blank" rel="noopener">Download PDF ↗</a></span></div>
         </div>
       </div>
     </div>
 
     <h3 class="sub-h">Skills</h3>
     <div class="skills">
-      <div class="row"><span>Languages · Frameworks</span><span>Python (FastAPI), Java (Spring Boot), SQL, Unity (C#)</span></div>
-      <div class="row"><span>Database · Cloud</span><span>AWS (EC2, RDS, S3), CDK, PostgreSQL (pgvector), MySQL</span></div>
-      <div class="row"><span>AI · Retrieval</span><span>CLOVA Studio (HCX), RAG, BM25 (Elasticsearch), Neo4j, Stable Diffusion LoRA, YOLOv8, MediaPipe</span></div>
+      <div class="row"><span>Languages · Frameworks</span><span>Python, Java (Spring Boot), SQL, Unity (C#)</span></div>
+      <div class="row"><span>Backend · Cloud</span><span>FastAPI, AWS (EC2, RDS, S3), CDK, PostgreSQL (pgvector), MySQL</span></div>
+      <div class="row"><span>3D · Vision · XR</span><span>3D Gaussian Splatting, COLMAP, SAM, Hunyuan3D-2.1, Blender (Python), Unity (C#), YOLOv8, MediaPipe, OpenCV</span></div>
+      <div class="row"><span>Generative AI</span><span>Stable Diffusion LoRA, LaMa inpainting</span></div>
+      <div class="row"><span>LLM · Retrieval</span><span>Claude API, CLOVA Studio (HCX), RAG, BM25 (Elasticsearch), pgvector, Neo4j</span></div>
       <div class="row"><span>Tools</span><span>Git, GitHub Actions, Codex, Claude Code</span></div>
     </div>
 
