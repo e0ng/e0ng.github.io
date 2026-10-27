@@ -467,12 +467,6 @@
                   <li>3D 객체 분할 전처리 — RoomPlan 스캔(USDZ)을 GLB로 변환하고, Blender 4.4와 호환되지 않던 SAMPart3D 렌더 스크립트를 수정해 16개 시점의 컬러 · 깊이 이미지와 카메라 정보 생성</li>
                   <li>가구 분리와 3D 생성 — SAM으로 가구 마스크를 만들고 LaMa로 빈 곳을 채운 뒤 Hunyuan3D-2.1로 이미지 → 3D 메시 생성 시도. 가려진 가구 형태를 이어 그리기보다 빈 곳을 무난히 메우는 보간 수준임을 확인</li>
                 </ul>
-                <div class="media"><p class="m-label">시도 결과</p>
-                <div class="shots2">
-                  <div class="shot"><span>3DGS 학습 결과 렌더링 (img/vo_3dgs.mp4)</span></div>
-                  <div class="shot"><span>SAM → LaMa → Hunyuan3D 결과 · 실패 사례 (img/vo_3d_fail.png)</span></div>
-                </div>
-                </div>
               </dd>
               <dt>Next</dt>
               <dd>여러 방법으로 방을 3D로 재현하며 가려진 부분은 생성 모델로도 자연스럽게 복원되지 않는 한계 확인 — 이 문제를 그래픽스와 생성 AI로 더 깊이 다뤄 보고 싶어진 계기</dd>
@@ -573,7 +567,6 @@
     </header>
     <div class="body d-body">
           <div class="inner">
-            <div class="media"><p class="m-label">시연 영상</p><div class="shot"><span>DEMO · 대화 → 일기 생성 시연 영상 (img/mediary_demo.mp4)</span></div></div>
             <div class="gallery">
               <div class="grow gfit"><img style="--r:1.4174" src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img style="--r:1.2864" src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div>
             </div>
