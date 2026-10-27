@@ -104,14 +104,14 @@
   }
 
   /* ---------- collapsible projects ---------- */
-  details.proj { border-bottom: 1px solid var(--line); }
-  details.proj summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto 28px; gap: 24px; align-items: start; padding: 22px 0; }
-  details.proj summary::-webkit-details-marker { display: none; }
-  details.proj summary h4 { font-weight: 400; font-size: 18px; letter-spacing: -0.015em; margin: 0; line-height: 1.45; }
-  details.proj summary .one { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
-  details.proj summary .tog { font-size: 20px; line-height: 1; text-align: right; color: var(--muted); transition: transform .2s; }
-  details.proj[open] summary .tog { transform: rotate(45deg); color: var(--accent); }
-  details.proj summary:hover h4 { color: var(--accent); }
+  details.proj { border-bottom: 1px solid var(--line); scroll-margin-top: 72px; }
+  details.proj > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto 28px; gap: 24px; align-items: start; padding: 22px 0; }
+  details.proj > summary::-webkit-details-marker { display: none; }
+  details.proj > summary h4 { font-weight: 400; font-size: 18px; letter-spacing: -0.015em; margin: 0; line-height: 1.45; }
+  details.proj > summary .one { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+  details.proj > summary .tog { font-size: 20px; line-height: 1; text-align: right; color: var(--muted); transition: transform .2s; }
+  details.proj[open] > summary .tog { transform: rotate(45deg); color: var(--accent); }
+  details.proj > summary:hover h4 { color: var(--accent); }
   .status { display: inline-block; margin-left: 8px; font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 0 7px; vertical-align: 2px; }
   .body { padding: 0 0 26px; }
   .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 10px 0 0; }
@@ -125,6 +125,23 @@
   .shot:has(img) { aspect-ratio: auto; border: 0; background: none; display: block; max-width: 860px; }
   .shot:has(img) img { position: static; height: auto; display: block; }
   .shot:has(img) span { display: none; }
+  .shot video { width: 100%; height: auto; display: block; }
+  .shot:has(video) { aspect-ratio: auto; border: 0; background: none; display: block; max-width: 860px; }
+  .shot:has(video) span { display: none; }
+  .vcap { margin: 8px 0 0; font-size: 12px; line-height: 1.6; color: var(--muted); }
+  details.demo > :not(summary) + :not(summary) { margin-top: 18px; }
+  details.demo > .vcap { margin-top: 8px; }
+  .shots2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 660px; }
+  .shots2 .shot { margin: 0; }
+  details.demo { margin: 0 0 22px; max-width: 660px; }
+  details.demo > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text); }
+  details.demo > summary::-webkit-details-marker { display: none; }
+  details.demo > summary::before { content: "▶"; display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; font-size: 9px; padding-left: 2px; box-sizing: border-box; background: var(--text); color: var(--bg); }
+  details.demo[open] > summary::before { content: "■"; padding-left: 0; font-size: 8px; }
+  details.demo > summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+  details.demo[open] > summary { margin-bottom: 12px; }
+  details.demo .shot, details.demo .shots2 { margin-bottom: 0; }
+  @media (max-width: 560px) { .shots2 { grid-template-columns: 1fr; } }
   .tldr { margin: 0 0 18px; max-width: 620px; }
   .tldr b { font-weight: 500; margin-right: 8px; }
   a.ext { color: var(--accent); border-bottom: 1px solid var(--line); }
@@ -140,6 +157,8 @@
   .g1 { grid-template-columns: 1fr; }
   .gposter { grid-template-columns: 1fr; max-width: 280px; }
   .gflex { display: flex; gap: 8px; align-items: flex-start; }
+  .gfit { display: flex; gap: 8px; align-items: flex-start; }
+  .gfit img { flex: var(--r) 1 0; width: 0; min-width: 0; height: auto; }
   .gflex img { height: 220px; width: auto; min-width: 0; object-fit: contain; }
   .gexh { grid-template-columns: 0.75fr 1fr; }
   @media (max-width: 560px) { .gflex img { height: 150px; } }
@@ -158,11 +177,57 @@
   .body .links a { color: var(--accent); }
   .body .links a:hover { text-decoration: underline; }
   @media (max-width: 720px) {
-    details.proj summary { grid-template-columns: 1fr auto 20px; gap: 12px; }
+    details.proj > summary { grid-template-columns: 1fr auto 20px; gap: 12px; }
     .body { grid-template-columns: 1fr; }
     .body > .spacer { display: none; }
     .body dl { grid-template-columns: 1fr; gap: 0; }
     .body dd { margin-bottom: 10px; }
+  }
+
+  /* ---------- project rows → detail pages ---------- */
+  .prow { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .prow h4 { font-weight: 400; font-size: 18px; letter-spacing: -0.015em; margin: 0; line-height: 1.45; }
+  .prow .one { margin: 2px 0 0; font-size: 13px; color: var(--muted); }
+  .prow:hover h4 { color: var(--accent); }
+  @media (max-width: 720px) { .prow { gap: 12px; } }
+
+  .detail .back { display: inline-block; margin-top: 6vh; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .detail .back:hover { color: var(--text); }
+  .d-head { padding: 5vh 0 5vh; border-bottom: 1px solid var(--line); margin-bottom: 6vh; }
+  .d-head h2 { font-weight: 400; font-size: clamp(32px, 5.5vw, 68px); letter-spacing: -0.04em; line-height: 1.08; margin: 0; max-width: 1000px; }
+  .d-head h2.long { font-size: clamp(26px, 3.4vw, 42px); letter-spacing: -0.03em; line-height: 1.25; }
+  .d-one { font-size: 16px; line-height: 1.65; color: var(--muted); margin: 16px 0 0; }
+  .d-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 16px; }
+  .d-tags .tags { margin: 0; }
+  .d-tags .st { margin-top: 0; }
+  .d-body { padding: 0; }
+  .d-body .inner { max-width: none; }
+  .d-body .tldr { font-size: 16px; max-width: none; margin: 0 0 6vh; }
+  .nowrap { white-space: nowrap; }
+  .media { margin: 0 0 40px; }
+  .m-label { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+  .media > :not(.m-label) + :not(.m-label) { margin-top: 18px; }
+  .media > .vcap { margin-top: 8px; }
+  .vpair { display: grid; grid-template-columns: 0.4625fr 1.7778fr; gap: 12px; align-items: start; margin: 0 0 40px; }
+  .vpair .shot { margin: 0; }
+  @media (max-width: 560px) { .vpair { grid-template-columns: 1fr; } .vpair > div:first-child { max-width: 260px; } }
+  .media .shot, .media .shots2 { margin-bottom: 0; }
+  .media:not(:has(img, video)) { display: none; } /* placeholder only — hidden until the file is added */
+  .d-body .gallery, .d-body .shots2 { max-width: none; margin-bottom: 40px; }
+  .d-body .shot { max-width: none; }
+  .d-body .gflex img { height: 300px; }
+  .d-body dl { grid-template-columns: 160px minmax(0, 1fr); gap: 0; margin-top: 2vh; border-bottom: 1px solid var(--line); }
+  .d-body dt, .d-body dd { padding: 18px 0; border-top: 1px solid var(--line); }
+  .d-body dt { padding-top: 21px; }
+  .d-body .inner > dl:first-child { margin-top: -6vh; }
+  .d-body .inner > dl:first-child > :nth-child(-n+2) { border-top: 0; }
+  .d-body dd .media { margin: 14px 0 0; }
+  .d-body .links { margin-top: 24px; }
+  @media (max-width: 720px) {
+    .d-body dl { grid-template-columns: 1fr; }
+    .d-body dt { padding: 16px 0 4px; }
+    .d-body dd { border-top: 0; padding: 0 0 16px; margin: 0; }
+    .d-body .gflex img { height: 150px; }
   }
 
   /* ---------- skills ---------- */
@@ -194,7 +259,6 @@
   .sum-head a { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
   .nrow { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); }
   .ntag { font-size: 10px; color: var(--muted); }
-  .nmore { display: block; margin-top: 6px; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
   .ndate { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .ntext { font-size: 17px; letter-spacing: -0.01em; line-height: 1.5; }
   .nrow:hover .ntext { color: var(--accent); }
@@ -263,16 +327,15 @@
 
     <div class="summary">
       <div class="sum-head"><span>News</span><a href="#projects">All projects ↘</a></div>
-      <a class="nrow" href="#projects"><span class="ndate">2026.03 –</span><span class="ntext">V-O — 실내 공간 스캔을 VR 편집으로 잇는 공간 분석 플랫폼 (졸업 프로젝트)</span></a>
-      <a class="nrow" href="#projects"><span class="ndate">2026.09 –</span><span class="ntext">지식그래프 스터디 — 검색 비교부터 GraphRAG까지</span></a>
-      <a class="nrow" href="#projects"><span class="ndate">2026.08</span><span class="ntext">Mediary — AI 아바타 일기 서비스</span></a>
-      <a class="nrow" href="#projects"><span class="ndate">2026.06</span><span class="ntext">FingerType — ASL 알파벳 인식 웹 앱</span></a>
-      <a class="nrow" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener"><span class="ndate">2026.01</span><span class="ntext">IJASC 논문 게재 「전통 병풍의 디지털 재현 및 확장 연구」<span class="nmore">See details ↗</span></span></a>
-      <a class="nrow" href="#projects"><span class="ndate">2025.11</span><span class="ntext">과학기술대학 학술제 우수상 — 전통 병풍 디지털 재현 연구</span></a>
-      <a class="nrow" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener"><span class="ndate">2025.11</span><span class="ntext">디지털 병풍 쇼케이스 · 전주대학교 X Space<span class="nmore">See details ↗</span></span></a>
-      <a class="nrow" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener"><span class="ndate">2025.09</span><span class="ntext">전시 [바람과 병풍] · 아트코리아랩<span class="nmore">See details ↗</span></span></a>
-      <a class="nrow" href="#projects"><span class="ndate">2025.08</span><span class="ntext">화경 / 바람과 병풍 — 인터랙티브 미디어아트 (모온컴퍼니 협업)</span></a>
-      <a class="nrow" href="https://ixr-lab.com/members/" target="_blank" rel="noopener"><span class="ndate">2025.03</span><span class="ntext">IXR Lab 학부 연구원<span class="nmore">See details ↗</span></span></a>
+      <a class="nrow" href="#vo"><span class="ndate">2026.03 –</span><span class="ntext">V-O — 실내 공간 스캔을 VR 편집으로 잇는 공간 분석 플랫폼 (졸업 프로젝트)</span></a>
+      <a class="nrow" href="#mediary"><span class="ndate">2026.08</span><span class="ntext">Mediary — AI 아바타 일기 서비스</span></a>
+      <a class="nrow" href="#fingertype"><span class="ndate">2026.06</span><span class="ntext">FingerType — ASL 알파벳 인식 웹 앱</span></a>
+      <a class="nrow" href="#folding-screen"><span class="ndate">2026.01</span><span class="ntext">IJASC 논문 게재 「전통 병풍의 디지털 재현 및 확장 연구」</span></a>
+      <a class="nrow" href="#folding-screen"><span class="ndate">2025.11</span><span class="ntext">과학기술대학 학술제 우수상 — 전통 병풍 디지털 재현 연구</span></a>
+      <a class="nrow" href="#folding-screen"><span class="ndate">2025.11</span><span class="ntext">디지털 병풍 쇼케이스 · 전주대학교 X Space</span></a>
+      <a class="nrow" href="#folding-screen"><span class="ndate">2025.09</span><span class="ntext">전시 [바람과 병풍] · 아트코리아랩</span></a>
+      <a class="nrow" href="#hwagyeong"><span class="ndate">2025.08</span><span class="ntext">화경 — 인터랙티브 미디어아트 (모온컴퍼니 협업)</span></a>
+      <a class="nrow" href="#folding-screen"><span class="ndate">2025.03</span><span class="ntext">IXR Lab 학부 연구원</span></a>
     </div>
   </section>
 
@@ -285,19 +348,92 @@
     <h3 class="group-h">Projects</h3>
     <div class="list">
 
-      <details class="proj">
-        <summary>
+      <a class="prow" href="#vo">
           <div class="main">
             <h4>V-O</h4>
             <p class="one">iOS로 스캔한 실내 공간을 VR로 옮기고, LLM이 만든 배치 조건과 최적화 로직으로 가구 배치를 조회 · 편집하는 공간 분석 플랫폼 (졸업 프로젝트)</p>
             <ul class="tags"><li>공간 스캔</li><li>VR</li><li>LLM 배치 조건</li><li>가구 배치 최적화</li><li>RAG</li></ul>
           </div>
-          <span class="tog">+</span>
-        </summary>
-        <div class="body">
+      </a>
+
+      <a class="prow" href="#hwagyeong">
+          <div class="main">
+            <h4>화경</h4>
+            <p class="one">AI로 생성한 병풍 배경과 사용자가 채색한 3D 동물이 실시간으로 상호작용하는 인터랙티브 미디어아트 (모온컴퍼니 협업)</p>
+            <ul class="tags"><li>Stable Diffusion LoRA</li><li>Unity (C#)</li><li>3D 인터랙션</li><li>UDP</li></ul>
+          </div>
+          <span class="st done">완료</span>
+      </a>
+
+      <a class="prow" href="#fingertype">
+          <div class="main">
+            <h4>FingerType</h4>
+            <p class="one">웹캠 · 동영상에서 ASL 알파벳을 인식해 텍스트로 변환하는 웹 앱</p>
+            <ul class="tags"><li>YOLOv8n</li><li>MediaPipe</li><li>Roboflow</li><li>Streamlit</li></ul>
+          </div>
+          <span class="st done">완료</span>
+      </a>
+
+      <a class="prow" href="#mediary">
+          <div class="main">
+            <h4>Mediary</h4>
+            <p class="one">채팅으로 하루를 기록하고 기억으로 연결하는 개인 맞춤형 AI 아바타 일기 서비스</p>
+            <ul class="tags"><li>FastAPI</li><li>pgvector</li><li>CLOVA Studio</li><li>LLM</li></ul>
+          </div>
+          <span class="st done">완료</span>
+      </a>
+
+    </div>
+
+    <h3 class="group-h">Publication</h3>
+    <div class="list">
+
+      <a class="prow" href="#folding-screen">
+          <div class="main">
+            <h4>전통 병풍의 디지털 재현 및 확장 연구: 디지털 병풍 사례를 중심으로</h4>
+            <p class="one">IJASC (The International Journal of Advanced Smart Convergence) · 2025, vol.14, no.4 · 3저자</p>
+            <ul class="tags"><li>Generative AI</li><li>LoRA Fine-Tuning</li><li>Stable Diffusion</li><li>Digital Heritage</li></ul>
+          </div>
+          <span class="st done">게재</span>
+      </a>
+
+    </div>
+
+    <h3 class="group-h">Study</h3>
+    <div class="list">
+
+      <a class="prow" href="#kg-study">
+          <div class="main">
+            <h4>지식그래프 스터디</h4>
+            <p class="one">대화 데이터로 키워드 · 벡터 · 그래프 검색을 직접 구현해 비교한 스터디</p>
+            <ul class="tags"><li>BM25</li><li>벡터 검색</li><li>지식그래프</li><li>Neo4j</li></ul>
+          </div>
+          <span class="st done">완료</span>
+      </a>
+
+    </div>
+  </section>
+
+
+
+
+
+  <!-- ================= PROJECT PAGES ================= -->
+  <section class="page detail" id="page-vo" data-parent="projects">
+    <a class="back" href="#projects">← Projects</a>
+    <header class="d-head">
+      <h2>V-O</h2>
+      <p class="d-one">iOS로 스캔한 실내 공간을 VR로 옮기고, LLM이 만든 배치 조건과 최적화 로직으로 가구 배치를 조회 · 편집하는 공간 분석 플랫폼 (졸업 프로젝트)</p>
+      <div class="d-tags"><ul class="tags"><li>공간 스캔</li><li>VR</li><li>LLM 배치 조건</li><li>가구 배치 최적화</li><li>RAG</li></ul></div>
+    </header>
+    <div class="body d-body">
           <div class="inner">
+            <div class="vpair">
+              <div><div class="shot"><video src="img/vo_ios_demo.mp4" controls muted playsinline preload="metadata"></video></div><p class="vcap">iOS 앱 — 공간 스캔 → 가구 배치 최적화</p></div>
+              <div><div class="shot"><video src="img/vo_vr_demo.mp4" controls muted playsinline preload="metadata"></video></div><p class="vcap">VR 앱 — 저장된 배치를 불러와 가구를 옮기고 새 버전으로 저장</p></div>
+            </div>
             <div class="gallery">
-              <div class="grow gflex"><img src="img/vo_ios1.png" alt="V-O iOS 공간 스캔" loading="lazy"><img src="img/vo_ios3.png" alt="V-O 최적화 배치 결과" loading="lazy"><img src="img/vo_vr2.png" alt="V-O VR 편집 화면" loading="lazy"></div>
+              <div class="grow gfit"><img style="--r:0.4956" src="img/vo_ios1.png" alt="V-O iOS 공간 스캔" loading="lazy"><img style="--r:0.4867" src="img/vo_ios3.png" alt="V-O 최적화 배치 결과" loading="lazy"><img style="--r:1.8" src="img/vo_vr2.png" alt="V-O VR 편집 화면" loading="lazy"></div>
             </div>
             <dl>
               <dt>Period</dt>
@@ -313,6 +449,8 @@
                   <li>최적화 · 공간 처리 파이프라인을 FastAPI 서버로 묶어 AWS(EC2 · RDS · S3)에 배포 · 운영 — 데이터 버전 · 처리 상태 관리, GitHub Actions 자동 배포</li>
                 </ul>
               </dd>
+              <dt>Architecture</dt>
+              <dd><div class="shot" style="margin:4px 0 0"><a href="img/vo_arch.png" target="_blank" rel="noopener"><img src="img/vo_arch.png" alt="V-O 시스템 구조도 — iOS · Unity 클라이언트, AWS EC2(FastAPI · 처리 모듈), RDS PostgreSQL, S3, Claude API, Gmail SMTP" loading="lazy"></a></div></dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
@@ -329,30 +467,35 @@
                   <li>3D 객체 분할 전처리 — RoomPlan 스캔(USDZ)을 GLB로 변환하고, Blender 4.4와 호환되지 않던 SAMPart3D 렌더 스크립트를 수정해 16개 시점의 컬러 · 깊이 이미지와 카메라 정보 생성</li>
                   <li>가구 분리와 3D 생성 — SAM으로 가구 마스크를 만들고 LaMa로 빈 곳을 채운 뒤 Hunyuan3D-2.1로 이미지 → 3D 메시 생성 시도. 가려진 가구 형태를 이어 그리기보다 빈 곳을 무난히 메우는 보간 수준임을 확인</li>
                 </ul>
+                <div class="media"><p class="m-label">시도 결과</p>
+                <div class="shots2">
+                  <div class="shot"><span>3DGS 학습 결과 렌더링 (img/vo_3dgs.mp4)</span></div>
+                  <div class="shot"><span>SAM → LaMa → Hunyuan3D 결과 · 실패 사례 (img/vo_3d_fail.png)</span></div>
+                </div>
+                </div>
               </dd>
               <dt>Next</dt>
-              <dd>여러 방법으로 방을 3D로 재현해 보며, 가려진 부분은 생성 모델로도 자연스럽게 복원되지 않는다는 한계를 확인했습니다. 이 문제를 그래픽스와 생성 AI로 더 깊이 다뤄 보고 싶어진 계기입니다.</dd>
+              <dd>여러 방법으로 방을 3D로 재현하며 가려진 부분은 생성 모델로도 자연스럽게 복원되지 않는 한계 확인 — 이 문제를 그래픽스와 생성 AI로 더 깊이 다뤄 보고 싶어진 계기</dd>
             </dl>
             <div class="links"><a href="https://github.com/VirtualOptimization/VO-server" target="_blank" rel="noopener">GITHUB ↗</a></div>
           </div>
-        </div>
-      </details>
+    </div>
+  </section>
 
-      <details class="proj">
-        <summary>
-          <div class="main">
-            <h4>화경 / 바람과 병풍</h4>
-            <p class="one">AI로 생성한 병풍 배경과 사용자가 채색한 3D 동물이 실시간으로 상호작용하는 인터랙티브 미디어아트 (모온컴퍼니 협업)</p>
-            <ul class="tags"><li>Stable Diffusion LoRA</li><li>Unity (C#)</li><li>3D 인터랙션</li><li>UDP</li></ul>
-          </div>
-          <span class="st done">완료</span>
-          <span class="tog">+</span>
-        </summary>
-        <div class="body">
+  <section class="page detail" id="page-hwagyeong" data-parent="projects">
+    <a class="back" href="#projects">← Projects</a>
+    <header class="d-head">
+      <h2>화경</h2>
+      <p class="d-one">AI로 생성한 병풍 배경과 사용자가 채색한 3D 동물이 실시간으로 상호작용하는 인터랙티브 미디어아트 (모온컴퍼니 협업)</p>
+      <div class="d-tags"><ul class="tags"><li>Stable Diffusion LoRA</li><li>Unity (C#)</li><li>3D 인터랙션</li><li>UDP</li></ul><span class="st done">완료</span></div>
+    </header>
+    <div class="body d-body">
           <div class="inner">
             <div class="gallery">
-              <div class="grow gexh"><img src="img/art-korea-lab1.jpg" alt="[바람과 병풍] 전시 포스터" loading="lazy"><img src="img/art-korea-lab2.jpg" alt="[바람과 병풍] 아트코리아랩 전시 현장" loading="lazy"></div>
-              <div class="grow g1"><img src="img/media-art.jpg" alt="화경 전시 공간" loading="lazy"></div>
+              <div><div class="grow gfit"><img style="--r:1.7778" src="img/hwagyeong_render.jpg" alt="화경 전시 구성 시안 — 병풍 디스플레이와 터치스크린 채색 키오스크" loading="lazy"><img style="--r:1.7778" src="img/hwagyeong_tablet.jpg?v=2" alt="화경 터치스크린 앱 목업 — 캐릭터 채색 화면" loading="lazy"></div>
+              <p class="vcap">전시 구성 시안 · 터치스크린 앱 목업 — 관람객이 키오스크에서 동물을 채색하면 병풍 화면에 3D 캐릭터로 나타남</p></div>
+              <div><div class="grow g1"><img src="img/hwagyeong_ui.jpg" alt="화경 터치스크린 앱 화면 흐름 — 시작, 동물 선택, 채색, 전송 중, 전송 완료" loading="lazy"></div>
+              <p class="vcap">터치스크린 앱 화면 흐름 — 시작 → 동물 선택(호랑이 · 용 · 거북이 · 학) → 채색 → 전송 → 전송 완료</p></div>
             </div>
             <dl>
               <dt>Period</dt>
@@ -367,6 +510,8 @@
                   <li>터치스크린 앱과 병풍 디스플레이 앱 간 UDP 통신 구현</li>
                 </ul>
               </dd>
+              <dt>Architecture</dt>
+              <dd><div class="shot" style="margin:4px 0 0"><a href="img/hwagyeong_flow.png" target="_blank" rel="noopener"><img src="img/hwagyeong_flow.png" alt="화경 데이터 흐름도 — 터치스크린 앱이 공유 폴더에 JPG를 저장하고 UDP(8888)로 파일 이름을 보내면 전시 화면 앱이 3D 동물을 생성하고 ACK(8889)를 회신, Stable Diffusion으로 60초마다 생성한 배경을 Flask 서버가 제공" loading="lazy"></a></div></dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
@@ -375,25 +520,23 @@
                   <li><span>결과</span><span>전송 후 터치스크린에 "전송 완료" 표시, 디스플레이에 동물 반영</span></li>
                 </ul>
               </dd>
-              <dt>Exhibition</dt>
-              <dd><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 2025.09.12 – 09.25<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
+              <dt>Related</dt>
+              <dd><a class="ext" href="#folding-screen">전통 병풍 디지털 재현 연구 →</a></dd>
             </dl>
           </div>
-        </div>
-      </details>
+    </div>
+  </section>
 
-      <details class="proj">
-        <summary>
-          <div class="main">
-            <h4>FingerType</h4>
-            <p class="one">웹캠 · 동영상에서 ASL 알파벳을 인식해 텍스트로 변환하는 웹 앱</p>
-            <ul class="tags"><li>YOLOv8n</li><li>MediaPipe</li><li>Roboflow</li><li>Streamlit</li></ul>
-          </div>
-          <span class="st done">완료</span>
-          <span class="tog">+</span>
-        </summary>
-        <div class="body">
+  <section class="page detail" id="page-fingertype" data-parent="projects">
+    <a class="back" href="#projects">← Projects</a>
+    <header class="d-head">
+      <h2>FingerType</h2>
+      <p class="d-one">웹캠 · 동영상에서 ASL 알파벳을 인식해 텍스트로 변환하는 웹 앱</p>
+      <div class="d-tags"><ul class="tags"><li>YOLOv8n</li><li>MediaPipe</li><li>Roboflow</li><li>Streamlit</li></ul><span class="st done">완료</span></div>
+    </header>
+    <div class="body d-body">
           <div class="inner">
+            <div class="media"><p class="m-label">시연 영상</p><div class="shot"><video src="img/fingertype_demo.mp4" controls muted playsinline preload="metadata"></video></div></div>
             <dl>
               <dt>Period</dt>
               <dd>2026.05 – 2026.06</dd>
@@ -418,23 +561,21 @@
             </dl>
             <div class="links"><a href="https://github.com/e0ng/FingerType" target="_blank" rel="noopener">GITHUB ↗</a></div>
           </div>
-        </div>
-      </details>
+    </div>
+  </section>
 
-      <details class="proj">
-        <summary>
-          <div class="main">
-            <h4>Mediary</h4>
-            <p class="one">채팅으로 하루를 기록하고 기억으로 연결하는 개인 맞춤형 AI 아바타 일기 서비스</p>
-            <ul class="tags"><li>FastAPI</li><li>pgvector</li><li>CLOVA Studio</li><li>LLM</li></ul>
-          </div>
-          <span class="st done">완료</span>
-          <span class="tog">+</span>
-        </summary>
-        <div class="body">
+  <section class="page detail" id="page-mediary" data-parent="projects">
+    <a class="back" href="#projects">← Projects</a>
+    <header class="d-head">
+      <h2>Mediary</h2>
+      <p class="d-one">채팅으로 하루를 기록하고 기억으로 연결하는 개인 맞춤형 AI 아바타 일기 서비스</p>
+      <div class="d-tags"><ul class="tags"><li>FastAPI</li><li>pgvector</li><li>CLOVA Studio</li><li>LLM</li></ul><span class="st done">완료</span></div>
+    </header>
+    <div class="body d-body">
           <div class="inner">
+            <div class="media"><p class="m-label">시연 영상</p><div class="shot"><span>DEMO · 대화 → 일기 생성 시연 영상 (img/mediary_demo.mp4)</span></div></div>
             <div class="gallery">
-              <div class="grow g2"><img src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div>
+              <div class="grow gfit"><img style="--r:1.4174" src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img style="--r:1.2864" src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div>
             </div>
             <dl>
               <dt>Period</dt>
@@ -460,30 +601,36 @@
             </dl>
             <div class="links"><a href="https://github.com/NCP-1st/NCP-Avatar" target="_blank" rel="noopener">GITHUB ↗</a></div>
           </div>
-        </div>
-      </details>
-
     </div>
+  </section>
 
-    <h3 class="group-h">Publication</h3>
-    <div class="list">
-
-      <details class="proj">
-        <summary>
-          <div class="main">
-            <h4>전통 병풍의 디지털 재현 및 확장 연구: 디지털 병풍 사례를 중심으로</h4>
-            <p class="one">IJASC (The International Journal of Advanced Smart Convergence) · 2025, vol.14, no.4 · 3저자</p>
-            <ul class="tags"><li>Generative AI</li><li>LoRA Fine-Tuning</li><li>Stable Diffusion</li><li>Digital Heritage</li></ul>
-          </div>
-          <span class="st done">게재</span>
-          <span class="tog">+</span>
-        </summary>
-        <div class="body">
+  <section class="page detail" id="page-folding-screen" data-parent="projects">
+    <a class="back" href="#projects">← Projects</a>
+    <header class="d-head">
+      <h2 class="long">전통 병풍의 디지털 재현 및 확장 연구: 디지털 병풍 사례를 중심으로</h2>
+      <p class="d-one">IJASC (The International Journal of Advanced Smart Convergence) · 2025, vol.14, no.4 · 3저자</p>
+      <div class="d-tags"><ul class="tags"><li>Generative AI</li><li>LoRA Fine-Tuning</li><li>Stable Diffusion</li><li>Digital Heritage</li></ul><span class="st done">게재</span></div>
+    </header>
+    <div class="body d-body">
           <div class="inner">
-            <p class="tldr">민화 산수 이미지 70장으로 Stable Diffusion v1.5에 LoRA를 학습해 전통 병풍을 디지털로 재현 · 확장하는 재현 가능한 생성형 AI 프레임워크를 제안하고, 산 · 물 · 통합 장면 세 작품으로 전시한 연구. IXR Lab 학부 연구원(25.03 – 25.12)으로 참여.</p>
+            <p class="tldr">민화 산수 이미지 70장으로 Stable Diffusion v1.5에 LoRA를 학습해 전통 병풍을 디지털로 재현 · 확장하는 재현 가능한 생성형 AI 프레임워크를 제안하고, 산 · 물 · 통합 장면 세 작품으로 전시한 연구. IXR Lab 학부 연구원<span class="nowrap">(25.03 – 25.12)</span>으로 참여.</p>
+            <div class="media"><p class="m-label">[바람과 병풍] 전시 영상</p><div class="shot"><video src="img/wind_screen_demo.mp4" controls muted playsinline preload="metadata"></video></div>
+            <p class="vcap">[바람과 병풍] · 아트코리아랩 · 2025.09 — 생성한 병풍 이미지에 모션을 준 전시 영상</p></div>
+            <div class="gallery">
+              <div><div class="grow gfit"><img style="--r:1.0016" src="img/art-korea-lab1.jpg" alt="[바람과 병풍] 전시 포스터" loading="lazy"><img style="--r:1.3333" src="img/art-korea-lab2.jpg" alt="[바람과 병풍] 아트코리아랩 전시 현장" loading="lazy"></div>
+              <p class="vcap">[바람과 병풍] · 아트코리아랩 · 2025.09 — 전시 포스터와 현장. LoRA로 생성한 병풍 이미지를 영상으로 확장해 상영</p></div>
+            </div>
+            <div class="media"><p class="m-label">전주대 쇼케이스 전시 영상</p><div class="shot"><video src="img/jeonju_showcase.mp4" controls muted playsinline preload="metadata"></video></div>
+            <p class="vcap">디지털 병풍 쇼케이스 · 전주대학교 X Space · 2025.11 — 관람객이 나비를 터치하면 파티클이 나오는 인터랙션을 Hokuyo 센서로 개발했으나, 전시장에 센서를 설치할 수 없어 영상에는 인터랙션 없이 Unity 병풍 화면만 담김</p></div>
+            <div class="gallery">
+              <div><div class="grow g1"><img src="img/media-art.jpg" alt="디지털 병풍 쇼케이스 · 전주대학교 X Space 전시 공간" loading="lazy"></div>
+              <p class="vcap">디지털 병풍 쇼케이스 · 전주대학교 X Space · 2025.11 — 전시 공간. LoRA로 생성한 병풍 이미지를 Unity 앱으로 병풍 화면에 실시간 표시</p></div>
+            </div>
             <dl>
               <dt>Paper</dt>
               <dd><a class="ext" href="https://doi.org/10.7236/IJASC.2025.14.4.305" target="_blank" rel="noopener">DOI 10.7236/IJASC.2025.14.4.305 ↗</a> · <a class="ext" href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003288670" target="_blank" rel="noopener">KCI ↗</a></dd>
+              <dt>Lab</dt>
+              <dd><a class="ext" href="https://ixr-lab.com/" target="_blank" rel="noopener">IXR Lab ↗</a> · 학부 연구원 · 2025.03 – 2025.12</dd>
               <dt>Authors</dt>
               <dd>김영호, 한정현, <b>권예원</b>, 김연우, 유다희</dd>
               <dt>Title (EN)</dt>
@@ -506,61 +653,49 @@
                   <li>민화 이미지 수집 · 전처리 — CLIP 유사도 기반 중복 제거, ViT 태깅 후 수동 보정</li>
                   <li>오픈소스 학습 코드(kohya-colab) 기반 LoRA 학습 설정 · 학습량 계산</li>
                   <li>프롬프트 설계와 Sampling Steps · CFG Scale 파라미터 실험</li>
-                  <li>AI 영상 제작 — Gemini · Deevid AI 비교, 고정 카메라 루프 영상 생성</li>
+                  <li>AI 영상 제작 — Gemini · Deevid AI 비교, 고정 카메라 루프 영상 생성 ([바람과 병풍])</li>
+                  <li>관람객 인터랙션 개발 — Hokuyo 센서로 나비 터치 시 파티클 효과 (전주대 쇼케이스용, 현장 센서 설치 불가로 미적용)</li>
                   <li>전시 구성, 논문 · 학술제 발표 자료 작성</li>
                 </ul>
               </dd>
               <dt>Exhibition</dt>
-              <dd><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
+              <dd><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 2025.09.12 – 09.25<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
+              <dt>Architecture</dt>
+              <dd><div class="shot" style="margin:4px 0 0"><a href="img/jeonju_arch.png" target="_blank" rel="noopener"><img src="img/jeonju_arch.png" alt="전주대 디지털 병풍 쇼케이스 시스템 구조도 — 오프라인 LoRA 학습 · 3D 에셋 제작, 런타임 Unity 병풍 제어 · Hokuyo 터치 · Python 이미지 생성 모듈" loading="lazy"></a></div><p class="vcap">전주대 쇼케이스 시스템 구조도</p></dd>
+              <dt>Related</dt>
+              <dd><a class="ext" href="#hwagyeong">화경 →</a></dd>
             </dl>
           </div>
-        </div>
-      </details>
-
     </div>
+  </section>
 
-    <h3 class="group-h">Study</h3>
-    <div class="list">
-
-      <details class="proj">
-        <summary>
-          <div class="main">
-            <h4>지식그래프 스터디</h4>
-            <p class="one">개인 대화 데이터로 검색 비교 → 지식 그래프 구축 → GraphRAG 에이전트까지 단계별 구현</p>
-            <ul class="tags"><li>BM25</li><li>pgvector</li><li>RDF</li><li>Neo4j</li><li>Cypher</li><li>GraphRAG</li></ul>
-          </div>
-          <span class="st ing">진행 중</span>
-          <span class="tog">+</span>
-        </summary>
-        <div class="body">
+  <section class="page detail" id="page-kg-study" data-parent="projects">
+    <a class="back" href="#projects">← Projects</a>
+    <header class="d-head">
+      <h2>지식그래프 스터디</h2>
+      <p class="d-one">대화 데이터로 키워드 · 벡터 · 그래프 검색을 직접 구현해 비교한 스터디</p>
+      <div class="d-tags"><ul class="tags"><li>BM25</li><li>벡터 검색</li><li>지식그래프</li><li>Neo4j</li></ul><span class="st done">완료</span></div>
+    </header>
+    <div class="body d-body">
           <div class="inner">
             <dl>
               <dt>Period</dt>
-              <dd>2026.09 –</dd>
+              <dd>2026.09 – 2026.10</dd>
               <dt>Context</dt>
-              <dd>Cloud Club 10기 스터디. 채팅 · Notion 데이터에서 "문서"가 아니라 "사실과 관계"를 찾는 지식 DB를 목표로 함.</dd>
+              <dd>Cloud Club 10기 스터디</dd>
               <dt>Done</dt>
               <dd>
                 <ul>
-                  <li>카카오톡 채팅 데이터에 grep / Elasticsearch BM25 / pgvector 검색 구현 및 비교, Recall@K 평가셋 구성</li>
-                  <li>미니 온톨로지(클래스 · 술어) 설계 후 LLM으로 근거 스팬과 함께 트리플 추출</li>
-                  <li>추출 결과를 Postgres(엔티티 · 엣지 · 근거) 테이블과 Turtle 파일로 저장, Neo4j에 MERGE로 적재</li>
-                  <li>Cypher 가변 길이 경로로 벡터 검색이 못 답한 다중 홉 질문 질의</li>
-                  <li>검색 에이전트에 그래프 리트리버를 붙여 v1(하이브리드 검색) vs v2(GraphRAG) 비교, Text2Cypher 시도</li>
+                  <li>키워드 검색(BM25)과 벡터 검색을 구현해 결과 비교</li>
+                  <li>LLM으로 문장에서 "누가 · 무엇과 · 어떤 관계"를 뽑아 Neo4j 그래프로 저장</li>
+                  <li>벡터 검색으로는 답하기 어려운, 여러 단계를 거치는 질문을 그래프로 찾아보기</li>
                 </ul>
               </dd>
             </dl>
             <div class="links"><a href="https://github.com/cloud-club/10th-KG-study/tree/main/members/e0ng" target="_blank" rel="noopener">GITHUB ↗</a></div>
           </div>
-        </div>
-      </details>
-
     </div>
   </section>
-
-
-
-
 
   <!-- ================= ABOUT ================= -->
   <section class="page" id="page-about">
@@ -579,12 +714,12 @@
           전체 구조를 설계하는 일과 시각적으로 표현하는 일을 모두 좋아합니다.
           지금까지 생성 모델로 전통 병풍을 재현해 전시하거나, 실내 스캔 데이터를 VR 공간으로 옮기는 프로젝트를 해 왔습니다.
           두 작업 모두 여러 기술을 엮어 하나의 장면을 만들어 낸다는 점이 인상 깊었습니다.
-          그 과정에서 실제 공간을 3D로 재현하려 했지만, 가려진 부분을 복원하는 데서 한계를 확인했습니다.
-          앞으로는 이 문제를 그래픽스와 생성 AI로 풀어 가는 연구를 하고 싶습니다.
+          실제 공간과 사물을 3D로 이해하고 만들어 내는 기술, 그리고 그 결과를 XR에서 사람이 직접 경험하게 하는 과정에 관심이 많습니다.
+          앞으로도 그래픽스와 생성 AI를 꾸준히 공부하며 관심 분야를 넓혀 가고 싶습니다.
         </p>
         <div class="info">
           <div class="row"><span>Education</span><span>덕성여자대학교 IT미디어공학과<br>2027.02 졸업 예정<br>GPA 4.1 / 4.5 · 학과 수석 (2023-2, 2026-1)</span></div>
-          <div class="row"><span>Interests</span><span>Computer graphics, Generative AI for 3D content, 3D reconstruction, XR</span></div>
+          <div class="row"><span>Interests</span><span>Computer graphics, 3D vision, generative AI, XR</span></div>
           <div class="row"><span>Based in</span><span>Seoul Area, Korea</span></div>
           <div class="row"><span>GitHub</span><span><a href="https://github.com/e0ng">github.com/e0ng</a></span></div>
           <div class="row"><span>CV</span><span><a href="KWON_YEWON_CV.pdf?v=20261021" target="_blank" rel="noopener">Download PDF ↗</a></span></div>
@@ -594,12 +729,10 @@
 
     <h3 class="sub-h">Skills</h3>
     <div class="skills">
-      <div class="row"><span>Languages · Frameworks</span><span>Python, Java (Spring Boot), SQL, Unity (C#)</span></div>
-      <div class="row"><span>Backend · Cloud</span><span>FastAPI, AWS (EC2, RDS, S3), CDK, PostgreSQL (pgvector), MySQL</span></div>
-      <div class="row"><span>3D · Vision · XR</span><span>3D Gaussian Splatting, COLMAP, SAM, Hunyuan3D-2.1, Blender (Python), Unity (C#), YOLOv8, MediaPipe, OpenCV</span></div>
-      <div class="row"><span>Generative AI</span><span>Stable Diffusion LoRA, LaMa inpainting</span></div>
-      <div class="row"><span>LLM · Retrieval</span><span>Claude API, CLOVA Studio (HCX), RAG, BM25 (Elasticsearch), pgvector, Neo4j</span></div>
-      <div class="row"><span>Tools</span><span>Git, GitHub Actions, Codex, Claude Code</span></div>
+      <div class="row"><span>Languages</span><span>Python, C#, Java, SQL</span></div>
+      <div class="row"><span>3D · XR</span><span>Unity, Blender, 3D Gaussian Splatting, COLMAP, SAM, OpenCV</span></div>
+      <div class="row"><span>Generative AI · LLM</span><span>Stable Diffusion (LoRA), Claude API, RAG</span></div>
+      <div class="row"><span>Backend · Infra</span><span>FastAPI, PostgreSQL (pgvector), AWS, Git · GitHub Actions</span></div>
     </div>
 
     <h3 class="sub-h">Experience &amp; Achievements</h3>
@@ -656,18 +789,19 @@
 
 <script>
   (function () {
-    var pages = ["home", "projects", "about", "contact"];
     var links = document.querySelectorAll(".menu a");
     var bar = document.getElementById("topbar");
+    var baseTitle = document.title;
 
     function show() {
       var key = (location.hash || "#home").slice(1);
-      if (pages.indexOf(key) === -1) key = "home";
-      pages.forEach(function (p) {
-        var el = document.getElementById("page-" + p);
-        if (el) el.classList.toggle("active", p === key);
-      });
-      links.forEach(function (a) { a.classList.toggle("active", a.dataset.page === key); });
+      var page = document.getElementById("page-" + key);
+      if (!page || !page.classList.contains("page")) { key = "home"; page = document.getElementById("page-home"); }
+      document.querySelectorAll(".page").forEach(function (el) { el.classList.toggle("active", el === page); });
+      var menuKey = page.dataset.parent || key;
+      links.forEach(function (a) { a.classList.toggle("active", a.dataset.page === menuKey); });
+      var h = page.classList.contains("detail") && page.querySelector(".d-head h2");
+      document.title = h ? h.textContent + " — KWON YEWON" : baseTitle;
       window.scrollTo(0, 0);
     }
 
