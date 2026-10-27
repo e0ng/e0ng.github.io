@@ -430,10 +430,10 @@
           <div class="inner">
             <div class="vpair">
               <div><div class="shot"><video src="img/vo_ios_demo.mp4" controls muted playsinline preload="metadata"></video></div><p class="vcap">iOS 앱 — 공간 스캔 → 가구 배치 최적화</p></div>
-              <div><div class="shot"><video src="img/vo_vr_demo.mp4" controls muted playsinline preload="metadata"></video></div><p class="vcap">VR 앱 — 저장된 배치를 불러와 가구를 옮기고 새 버전으로 저장</p></div>
+              <div><div class="shot"><video src="img/vo_vr_demo.mp4" controls muted playsinline preload="metadata"></video></div><p class="vcap">VR 앱 — 저장된 배치를 불러와 가구 이동 · 새 버전 저장</p></div>
             </div>
             <div class="gallery">
-              <div class="grow gfit"><img style="--r:0.4956" src="img/vo_ios1.png" alt="V-O iOS 공간 스캔" loading="lazy"><img style="--r:0.4867" src="img/vo_ios3.png" alt="V-O 최적화 배치 결과" loading="lazy"><img style="--r:1.8" src="img/vo_vr2.png" alt="V-O VR 편집 화면" loading="lazy"></div>
+              <div class="grow gfit"><img style="--r:0.4956" src="img/vo_ios1.png" alt="V-O iOS 공간 스캔" loading="lazy"><img style="--r:0.4867" src="img/vo_ios3.png" alt="V-O 최적화 배치 결과" loading="lazy"><img style="--r:1.8" src="img/vo_vr2.png" alt="V-O VR 편집 화면" loading="lazy"></div><p class="vcap">앱 화면 — iOS 공간 스캔 · 배치 최적화 결과 · VR 편집</p>
             </div>
             <dl>
               <dt>Period</dt>
@@ -450,7 +450,7 @@
                 </ul>
               </dd>
               <dt>Architecture</dt>
-              <dd><div class="shot" style="margin:4px 0 0"><a href="img/vo_arch.png" target="_blank" rel="noopener"><img src="img/vo_arch.png" alt="V-O 시스템 구조도 — iOS · Unity 클라이언트, AWS EC2(FastAPI · 처리 모듈), RDS PostgreSQL, S3, Claude API, Gmail SMTP" loading="lazy"></a></div></dd>
+              <dd><div class="shot" style="margin:4px 0 0"><a href="img/vo_arch.png" target="_blank" rel="noopener"><img src="img/vo_arch.png" alt="V-O 시스템 구조도 — iOS · Unity 클라이언트, AWS EC2(FastAPI · 처리 모듈), RDS PostgreSQL, S3, Claude API, Gmail SMTP" loading="lazy"></a></div><p class="vcap">시스템 구조도 — iOS · VR 클라이언트, AWS 위 FastAPI 서버, Claude API</p></dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
@@ -487,9 +487,9 @@
           <div class="inner">
             <div class="gallery">
               <div><div class="grow gfit"><img style="--r:1.7778" src="img/hwagyeong_render.jpg" alt="화경 전시 구성 시안 — 병풍 디스플레이와 터치스크린 채색 키오스크" loading="lazy"><img style="--r:1.7778" src="img/hwagyeong_tablet.jpg?v=2" alt="화경 터치스크린 앱 목업 — 캐릭터 채색 화면" loading="lazy"></div>
-              <p class="vcap">전시 구성 시안 · 터치스크린 앱 목업 — 관람객이 키오스크에서 동물을 채색하면 병풍 화면에 3D 캐릭터로 나타남</p></div>
+              <p class="vcap">전시 구성 시안 · 앱 목업 — 키오스크에서 채색한 동물이 병풍 화면에 3D로 등장</p></div>
               <div><div class="grow g1"><img src="img/hwagyeong_ui.jpg" alt="화경 터치스크린 앱 화면 흐름 — 시작, 동물 선택, 채색, 전송 중, 전송 완료" loading="lazy"></div>
-              <p class="vcap">터치스크린 앱 화면 흐름 — 시작 → 동물 선택(호랑이 · 용 · 거북이 · 학) → 채색 → 전송 → 전송 완료</p></div>
+              <p class="vcap">터치스크린 앱 화면 흐름 — 시작 → 동물 선택 → 채색 → 전송 → 완료</p></div>
             </div>
             <dl>
               <dt>Period</dt>
@@ -505,7 +505,7 @@
                 </ul>
               </dd>
               <dt>Architecture</dt>
-              <dd><div class="shot" style="margin:4px 0 0"><a href="img/hwagyeong_flow.png" target="_blank" rel="noopener"><img src="img/hwagyeong_flow.png" alt="화경 데이터 흐름도 — 터치스크린 앱이 공유 폴더에 JPG를 저장하고 UDP(8888)로 파일 이름을 보내면 전시 화면 앱이 3D 동물을 생성하고 ACK(8889)를 회신, Stable Diffusion으로 60초마다 생성한 배경을 Flask 서버가 제공" loading="lazy"></a></div></dd>
+              <dd><div class="shot" style="margin:4px 0 0"><a href="img/hwagyeong_flow.png" target="_blank" rel="noopener"><img src="img/hwagyeong_flow.png" alt="화경 데이터 흐름도 — 터치스크린 앱이 공유 폴더에 JPG를 저장하고 UDP(8888)로 파일 이름을 보내면 전시 화면 앱이 3D 동물을 생성하고 ACK(8889)를 회신, Stable Diffusion으로 60초마다 생성한 배경을 Flask 서버가 제공" loading="lazy"></a></div><p class="vcap">데이터 흐름도 — 이미지는 공유 폴더, 전송 신호는 UDP · ACK</p></dd>
               <dt>Point</dt>
               <dd>
                 <ul class="pt">
@@ -530,7 +530,7 @@
     </header>
     <div class="body d-body">
           <div class="inner">
-            <div class="media"><p class="m-label">시연 영상</p><div class="shot"><video src="img/fingertype_demo.mp4" controls muted playsinline preload="metadata"></video></div></div>
+            <div class="media"><div class="shot"><video src="img/fingertype_demo.mp4" controls muted playsinline preload="metadata"></video></div><p class="vcap">시연 영상 — 웹캠으로 손 모양을 인식해 알파벳 입력</p></div>
             <dl>
               <dt>Period</dt>
               <dd>2026.05 – 2026.06</dd>
@@ -568,7 +568,7 @@
     <div class="body d-body">
           <div class="inner">
             <div class="gallery">
-              <div class="grow gfit"><img style="--r:1.4174" src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img style="--r:1.2864" src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div>
+              <div class="grow gfit"><img style="--r:1.4174" src="img/diary1.png" alt="Mediary 화면" loading="lazy"><img style="--r:1.2864" src="img/diary2.png" alt="Mediary 화면" loading="lazy"></div><p class="vcap">앱 화면 — 사진과 대화로 일기 기록 · 영상용 캐릭터와 목소리 선택</p>
             </div>
             <dl>
               <dt>Period</dt>
@@ -607,17 +607,17 @@
     <div class="body d-body">
           <div class="inner">
             <p class="tldr">민화 산수 이미지 70장으로 Stable Diffusion v1.5에 LoRA를 학습해 전통 병풍을 디지털로 재현 · 확장하는 재현 가능한 생성형 AI 프레임워크를 제안하고, 산 · 물 · 통합 장면 세 작품으로 전시한 연구. IXR Lab 학부 연구원<span class="nowrap">(25.03 – 25.12)</span>으로 참여.</p>
-            <div class="media"><p class="m-label">[바람과 병풍] 전시 영상</p><div class="shot"><video src="img/wind_screen_demo.mp4" controls muted playsinline preload="metadata"></video></div>
-            <p class="vcap">[바람과 병풍] · 아트코리아랩 · 2025.09 — 생성한 병풍 이미지에 모션을 준 전시 영상</p></div>
+            <div class="media"><div class="shot"><video src="img/wind_screen_demo.mp4" controls muted playsinline preload="metadata"></video></div>
+            <p class="vcap">[바람과 병풍] 전시 영상 — 생성한 병풍 이미지에 모션을 준 영상</p></div>
             <div class="gallery">
               <div><div class="grow gfit"><img style="--r:1.0016" src="img/art-korea-lab1.jpg" alt="[바람과 병풍] 전시 포스터" loading="lazy"><img style="--r:1.3333" src="img/art-korea-lab2.jpg" alt="[바람과 병풍] 아트코리아랩 전시 현장" loading="lazy"></div>
-              <p class="vcap">[바람과 병풍] · 아트코리아랩 · 2025.09 — 전시 포스터와 현장. LoRA로 생성한 병풍 이미지를 영상으로 확장해 상영</p></div>
+              <p class="vcap">[바람과 병풍] 포스터 · 현장 — 아트코리아랩, 2025.09</p></div>
             </div>
-            <div class="media"><p class="m-label">전주대 쇼케이스 전시 영상</p><div class="shot"><video src="img/jeonju_showcase.mp4" controls muted playsinline preload="metadata"></video></div>
-            <p class="vcap">디지털 병풍 쇼케이스 · 전주대학교 X Space · 2025.11 — 관람객이 나비를 터치하면 파티클이 나오는 인터랙션을 Hokuyo 센서로 개발했으나, 전시장에 센서를 설치할 수 없어 영상에는 인터랙션 없이 Unity 병풍 화면만 담김</p></div>
+            <div class="media"><div class="shot"><video src="img/jeonju_showcase.mp4" controls muted playsinline preload="metadata"></video></div>
+            <p class="vcap">전주대 쇼케이스 전시 영상 — Hokuyo 나비 터치 인터랙션은 현장 센서 설치 불가로 영상에 미포함</p></div>
             <div class="gallery">
               <div><div class="grow g1"><img src="img/media-art.jpg" alt="디지털 병풍 쇼케이스 · 전주대학교 X Space 전시 공간" loading="lazy"></div>
-              <p class="vcap">디지털 병풍 쇼케이스 · 전주대학교 X Space · 2025.11 — 전시 공간. LoRA로 생성한 병풍 이미지를 Unity 앱으로 병풍 화면에 실시간 표시</p></div>
+              <p class="vcap">전주대 쇼케이스 전시 공간 — 전주대학교 X Space, 2025.11</p></div>
             </div>
             <dl>
               <dt>Paper</dt>
@@ -654,7 +654,7 @@
               <dt>Exhibition</dt>
               <dd><a class="ext" href="https://ixr-lab.com/news/art-korea-lab-folding-screen/" target="_blank" rel="noopener">[바람과 병풍] ↗</a> · 아트코리아랩 · 2025.09.12 – 09.25<br><a class="ext" href="https://ixr-lab.com/news/digital-folding-screen-showcase/" target="_blank" rel="noopener">디지털 병풍 쇼케이스 ↗</a> · 전주대학교 X Space · 2025.11</dd>
               <dt>Architecture</dt>
-              <dd><div class="shot" style="margin:4px 0 0"><a href="img/wind_screen_arch.png" target="_blank" rel="noopener"><img src="img/wind_screen_arch.png" alt="[바람과 병풍] 생성 파이프라인 — 데이터 정제(이미지 수집, CLIP 유사도, WD 태깅) → Stable Diffusion 1.5 LoRA 학습 → 민화 LoRA로 이미지 생성 → DeeVid AI · Google Veo3로 이미지를 영상으로 변환" loading="lazy"></a></div><p class="vcap">[바람과 병풍] 생성 파이프라인</p><div class="shot" style="margin:24px 0 0"><a href="img/jeonju_arch.png" target="_blank" rel="noopener"><img src="img/jeonju_arch.png" alt="전주대 디지털 병풍 쇼케이스 시스템 구조도 — 오프라인 LoRA 학습 · 3D 에셋 제작, 런타임 Unity 병풍 제어 · Hokuyo 터치 · Python 이미지 생성 모듈" loading="lazy"></a></div><p class="vcap">전주대 쇼케이스 시스템 구조도</p></dd>
+              <dd><div class="shot" style="margin:4px 0 0"><a href="img/wind_screen_arch.png" target="_blank" rel="noopener"><img src="img/wind_screen_arch.png" alt="[바람과 병풍] 생성 파이프라인 — 데이터 정제(이미지 수집, CLIP 유사도, WD 태깅) → Stable Diffusion 1.5 LoRA 학습 → 민화 LoRA로 이미지 생성 → DeeVid AI · Google Veo3로 이미지를 영상으로 변환" loading="lazy"></a></div><p class="vcap">[바람과 병풍] 생성 파이프라인 — 데이터 정제 → LoRA 학습 → 이미지 생성 → 영상화</p><div class="shot" style="margin:24px 0 0"><a href="img/jeonju_arch.png" target="_blank" rel="noopener"><img src="img/jeonju_arch.png" alt="전주대 디지털 병풍 쇼케이스 시스템 구조도 — 오프라인 LoRA 학습 · 3D 에셋 제작, 런타임 Unity 병풍 제어 · Hokuyo 터치 · Python 이미지 생성 모듈" loading="lazy"></a></div><p class="vcap">전주대 쇼케이스 시스템 구조도 — 오프라인 LoRA 학습 · 런타임 Unity 병풍 제어</p></dd>
               <dt>Related</dt>
               <dd><a class="ext" href="#hwagyeong">화경 →</a></dd>
             </dl>
